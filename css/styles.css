@@ -1,0 +1,24 @@
+/* 
+ * SISTEMA DE QR - SISTEMAS PARTY VOL 2
+ * CSS Modular Structure
+ */
+
+/* Estilos Base */
+@import url('base.css');
+
+/* Animaciones */
+@import url('animations.css');
+
+/* Componentes */
+@import url('navbar.css');
+@import url('hero.css');
+@import url('countdown.css');
+@import url('event-info.css');
+@import url('cta.css');
+@import url('contests.css');
+@import url('gallery.css');
+@import url('attendees.css');
+@import url('about-footer.css');
+
+/* Responsive */
+@import url('responsive.css');

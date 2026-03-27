@@ -1,0 +1,229 @@
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .btn-ingresar {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .hero-title {
+        font-size: 36px;
+    }
+
+    .hero-description {
+        font-size: 16px;
+    }
+
+    .event-info {
+        padding: 60px 20px;
+    }
+
+    .event-name {
+        font-size: 36px;
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-card-value {
+        font-size: 20px;
+    }
+
+    .event-pricing {
+        padding: 30px 20px;
+    }
+
+    .pricing-title {
+        font-size: 24px;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-festival {
+        height: 50vh;
+        min-height: 400px;
+    }
+
+    .cta-festival-title {
+        font-size: 36px;
+    }
+
+    .cta-festival-btn {
+        padding: 14px 35px;
+        font-size: 16px;
+    }
+
+    .gallery-section {
+        padding: 60px 20px;
+    }
+
+    .gallery-title {
+        font-size: 36px;
+    }
+
+    .carousel-slide {
+        flex-direction: row;
+        padding: 10px;
+        gap: 10px;
+        perspective: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+    }
+
+    .triptych-item {
+        height: 250px;
+        min-width: 200px;
+        scroll-snap-align: center;
+        transform: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+        margin: 0 !important;
+    }
+
+    .triptych-item:nth-child(1),
+    .triptych-item:nth-child(2),
+    .triptych-item:nth-child(3) {
+        transform: none !important;
+        transform-origin: center !important;
+    }
+
+    .about-title {
+        font-size: 36px;
+    }
+
+    .about-description {
+        font-size: 16px;
+    }
+
+    .attendees-section {
+        padding: 60px 20px;
+    }
+
+    .attendees-title {
+        font-size: 32px;
+    }
+
+    .attendees-subtitle {
+        font-size: 14px;
+    }
+
+    .counter-display {
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px 40px;
+    }
+
+    .counter-number {
+        font-size: 72px;
+        min-width: auto;
+    }
+
+    .counter-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .counter-icon svg {
+        width: 35px;
+        height: 35px;
+    }
+
+    .attendee-btn {
+        padding: 16px 40px;
+        font-size: 18px;
+    }
+
+    .attendees-message {
+        font-size: 16px;
+    }
+
+    .countdown-container {
+        margin-top: 30px;
+    }
+
+    .countdown-title {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .countdown {
+        gap: 8px;
+        scale: 0.8;
+    }
+
+    .countdown-item {
+        padding: 15px 20px;
+    }
+
+    .countdown-value {
+        font-size: 36px;
+        margin-bottom: 5px;
+    }
+
+    .countdown-label {
+        font-size: 10px;
+    }
+
+    .countdown-separator {
+        font-size: 32px;
+    }
+
+    /* Contests Section */
+    .contests-section {
+        padding: 60px 20px;
+    }
+
+    .contests-title {
+        font-size: 32px;
+    }
+
+    .contests-subtitle {
+        font-size: 16px;
+    }
+
+    .contests-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .contest-card {
+        padding: 30px 20px;
+    }
+
+    .contest-name {
+        font-size: 22px;
+    }
+
+    .contest-description {
+        font-size: 14px;
+    }
+
+    .prize-wrapper {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .prize-amount {
+        font-size: 28px;
+    }
+
+    .contests-note {
+        margin-top: 30px;
+        padding: 15px;
+    }
+
+    .contests-note p {
+        font-size: 14px;
+    }
+}

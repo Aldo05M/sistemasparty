@@ -1,0 +1,229 @@
+/* CONTESTS & PRIZES SECTION */
+.contests-section {
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+    padding: 100px 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.contests-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 16, 240, 0.15) 0%, transparent 70%);
+}
+
+.contests-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.contests-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contests-title {
+    font-size: 56px;
+    font-weight: 900;
+    color: #FF10F0;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 15px #FF10F0,
+                 0 0 30px #FF10F0,
+                 0 0 45px #FF10F0,
+                 0 0 60px #FFFF00;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+.contests-subtitle {
+    font-size: 20px;
+    color: #00F0FF;
+    font-weight: 600;
+    text-shadow: 0 0 10px #00F0FF;
+}
+
+.contests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.contest-card {
+    background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+    padding: 40px;
+    border-radius: 20px;
+    border: 3px solid #39FF14;
+    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4),
+                0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.contest-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #39FF14, #00F0FF, #FF10F0, #FFFF00);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    animation: borderRotate 4s linear infinite;
+}
+
+.contest-card:hover::before {
+    opacity: 0.8;
+}
+
+.contest-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: #00F0FF;
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.6),
+                0 0 50px rgba(0, 240, 255, 0.5),
+                0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.contest-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255, 16, 240, 0.3) 0%, rgba(255, 255, 0, 0.3) 100%);
+    border-radius: 50%;
+    border: 3px solid #FF10F0;
+    box-shadow: 0 0 20px rgba(255, 16, 240, 0.6),
+                inset 0 0 20px rgba(255, 255, 0, 0.3);
+    transition: all 0.4s ease;
+}
+
+.contest-card:hover .contest-icon {
+    background: linear-gradient(135deg, rgba(255, 16, 240, 0.5) 0%, rgba(255, 255, 0, 0.5) 100%);
+    border-color: #FFFF00;
+    transform: scale(1.15) rotate(360deg);
+    box-shadow: 0 0 30px rgba(255, 16, 240, 0.8),
+                0 0 50px rgba(255, 255, 0, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.contest-icon svg {
+    width: 40px;
+    height: 40px;
+    fill: #FF10F0;
+    filter: drop-shadow(0 0 10px #FF10F0);
+}
+
+.contest-name {
+    font-size: 28px;
+    font-weight: 800;
+    color: #FFFF00;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px #FFFF00,
+                 0 0 25px #FFFF00;
+}
+
+.contest-description {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.prize-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(57, 255, 20, 0.1);
+    border-radius: 15px;
+    border: 2px solid #39FF14;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4),
+                inset 0 0 15px rgba(0, 240, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.contest-card:hover .prize-wrapper {
+    background: rgba(57, 255, 20, 0.15);
+    border-color: #00F0FF;
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.6),
+                0 0 40px rgba(0, 240, 255, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.prize-badge {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(255, 255, 0, 0.3) 0%, rgba(255, 102, 0, 0.3) 100%);
+    border-radius: 50%;
+    border: 2px solid #FFFF00;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+}
+
+.prize-badge svg {
+    width: 28px;
+    height: 28px;
+    fill: #FFFF00;
+    filter: drop-shadow(0 0 10px #FFFF00);
+}
+
+.prize-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.prize-label {
+    font-size: 14px;
+    color: #00F0FF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    text-shadow: 0 0 10px #00F0FF;
+}
+
+.prize-amount {
+    font-size: 32px;
+    font-weight: 900;
+    color: #39FF14;
+    text-shadow: 0 0 15px #39FF14,
+                 0 0 30px #39FF14;
+}
+
+.contests-note {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    background: rgba(255, 255, 0, 0.05);
+    border-radius: 10px;
+    border: 2px dashed #FFFF00;
+}
+
+.contests-note p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    margin: 0;
+    text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+}

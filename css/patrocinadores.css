@@ -1,0 +1,220 @@
+@media (min-width: 1200px) {
+  .sponsors-logos-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px 48px;
+    padding: 0 10vw;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .sponsor-logo {
+    min-width: 120px;
+    min-height: 120px;
+    max-width: 150px;
+    max-height: 150px;
+    padding: 18px;
+  }
+  .sponsor-logo img {
+    width: 80px;
+    height: 80px;
+  }
+}
+/* ========================== */
+/*  PATROCINADORES - NEON MURAL */
+/* ========================== */
+body {
+  min-height: 100vh;
+  background: url('https://images.pexels.com/photos/4651855/pexels-photo-4651855.jpeg') center center/cover no-repeat !important;
+  position: relative;
+}
+.sponsors-mural-section {
+  position: relative;
+  overflow: hidden;
+  padding: 70px 20px 50px 20px;
+  min-height: 100vh;
+  z-index: 1;
+  /* El fondo ahora está en body */
+}
+
+/* Fondo desenfocado y oscurecido */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgba(30,0,40,0.60);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+/* Botón menú móvil siempre encima */
+.mobile-menu-toggle {
+  position: fixed !important;
+  z-index: 3001 !important;
+}
+
+/* Eliminar el fondo neon animado */
+.sponsors-bg-neon { display: none !important; }
+.sponsors-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+.sponsors-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow:
+    0 0 12px #ff00cc,
+    0 0 32px #a5afaf,
+    0 0 48px #645a70;
+  animation: sponsorsGlow 2.5s ease-in-out infinite alternate;
+}
+@keyframes sponsorsGlow {
+  0% { text-shadow: 0 0 12px #ff00cc, 0 0 32px #00eaff, 0 0 48px #a259ff; }
+  100% { text-shadow: 0 0 24px #ff00cc, 0 0 48px #00eaff, 0 0 80px #a259ff; }
+}
+.sponsors-subtitle {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  margin-bottom: 36px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px #0008;
+}
+/* Grid más grande y espacioso */
+.sponsors-logos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px 60px;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 60px;
+  padding: 0 5vw;
+}
+
+/* --- ESTÉTICA MEJORADA PARA LOGOS --- */
+.sponsor-logo {
+  background: rgba(30, 30, 40, 0.55);
+  border-radius: 50%;
+  padding: 38px;
+  box-shadow: 0 8px 48px 0 #0008, 0 0 0 #fff0;
+  transition: transform 0.28s, box-shadow 0.28s, background 0.28s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  min-height: 180px;
+  max-width: 220px;
+  max-height: 220px;
+  margin: 0 auto;
+  position: relative;
+}
+.sponsor-logo img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  box-shadow: 0 0 0 10px rgba(255,255,255,0.04);
+  filter: drop-shadow(0 0 18px #fff8) brightness(1.08);
+  transition: transform 0.28s, filter 0.28s, box-shadow 0.28s;
+}
+.sponsor-logo:hover,
+.sponsor-logo:focus {
+  transform: scale(1.13) rotate(-2deg);
+  box-shadow: 0 0 32px #ff00cc88, 0 0 48px #00eaff88, 0 8px 40px #000a;
+  background: rgba(40, 0, 60, 0.75);
+}
+.sponsor-logo:hover img,
+.sponsor-logo:focus img {
+  filter: drop-shadow(0 0 24px #ff00cc) drop-shadow(0 0 32px #00eaff) brightness(1.15);
+  box-shadow: 0 0 0 10px #fff2;
+}
+.sponsors-cta {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: #fff;
+  text-shadow: 0 0 8px #a259ff;
+}
+.sponsors-contact-btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #ff00cc 0%, #00eaff 100%);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 0 18px #ff00cc55, 0 0 32px #00eaff33;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+.sponsors-contact-btn:hover,
+.sponsors-contact-btn:focus {
+  transform: scale(1.08);
+  background: linear-gradient(90deg, #00eaff 0%, #ff00cc 100%);
+  box-shadow: 0 0 32px #ff00cc, 0 0 48px #00eaff;
+  color: #fff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .sponsors-logos-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 30px;
+    padding: 0 2vw;
+  }
+  .sponsor-logo {
+    min-width: 130px;
+    min-height: 130px;
+    max-width: 160px;
+    max-height: 160px;
+    padding: 24px;
+  }
+  .sponsor-logo img {
+    width: 80px;
+    height: 80px;
+  }
+}
+@media (max-width: 600px) {
+  .sponsors-title {
+    font-size: 2.1rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+  .sponsors-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 32px;
+  }
+  .sponsors-cta {
+    font-size: 1.15rem;
+  }
+  .sponsors-contact-btn {
+    font-size: 1.15rem;
+    padding: 16px 36px;
+  }
+  .sponsors-logos-grid {
+    grid-template-columns: 1fr;
+    gap: 32px 0;
+    padding: 0 0vw;
+  }
+  .sponsor-logo {
+    min-width: 160px;
+    min-height: 160px;
+    max-width: 200px;
+    max-height: 200px;
+    padding: 24px;
+  }
+  .sponsor-logo img {
+    width: 110px;
+    height: 110px;
+  }
+}

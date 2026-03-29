@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Patrocinadores - Sistemas Party</title>
+		<link rel="stylesheet" href="css/styles.css">
+		<link rel="stylesheet" href="css/patrocinadores.css">
+</head>
+<body>
+        <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li><a href="perreo.html">Reyes del Perreo </a></li>
+            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li class="active"><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li><a href="perreo.html">Reyes del Perreo </a></li>
+            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li class="active"><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+		<!-- ========================== -->
+		<!--  SECCIÓN PATROCINADORES    -->
+		<!-- ========================== -->
+		<section class="sponsors-mural-section">
+			<div class="sponsors-bg-neon"></div>
+			<div class="sponsors-content">
+				<h2 class="sponsors-title">PATROCINADORES </h2>
+				<p class="sponsors-subtitle">Gracias por hacer posible esta noche</p>
+				<div class="sponsors-logos-grid">
+					<!-- LOGOS: Reemplaza src por tus imágenes (ideal PNG fondo transparente) -->
+					<div class="sponsor-logo"><img src="img/logo1.png" alt="Patrocinador 1"></div>
+					<div class="sponsor-logo"><img src="img/logo2.png" alt="Patrocinador 2"></div>
+					<div class="sponsor-logo"><img src="img/logo3.png" alt="Patrocinador 3"></div>
+					<div class="sponsor-logo"><img src="img/logo4.png" alt="Patrocinador 4"></div>
+					<div class="sponsor-logo"><img src="img/logo5.png" alt="Patrocinador 5"></div>
+					<div class="sponsor-logo"><img src="img/logo6.png" alt="Patrocinador 6"></div>
+					<div class="sponsor-logo"><img src="img/logo7.png" alt="Patrocinador 7"></div>
+					<div class="sponsor-logo"><img src="img/logo8.png" alt="Patrocinador 8"></div>
+					<div class="sponsor-logo"><img src="img/logo9.png" alt="Patrocinador 9"></div>
+					<!-- Agrega/quita logos según necesites -->
+				</div>
+				<div class="sponsors-cta">
+					<p>💬 ¿Quieres aparecer aquí?</p>
+					<a href="index.html#contacto" class="sponsors-contact-btn">Contáctanos</a>
+				</div>
+			</div>
+		</section>
+<script>
+// Lógica de menú móvil (idéntica a otras secciones)
+document.addEventListener('DOMContentLoaded', function() {
+  const menuToggle = document.querySelector('.mobile-menu-toggle');
+  const mobileMenu = document.querySelector('.mobile-menu');
+  if (menuToggle && mobileMenu) {
+	  menuToggle.addEventListener('click', function() {
+		  const isOpen = mobileMenu.classList.toggle('open');
+		  menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+	  });
+	  mobileMenu.querySelectorAll('a').forEach(link => {
+		  link.addEventListener('click', () => {
+			  mobileMenu.classList.remove('open');
+			  menuToggle.setAttribute('aria-expanded', 'false');
+		  });
+	  });
+  }
+});
+</script>
+</body>
+</html>

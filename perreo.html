@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyes del Perreo - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/perreo.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li class="active"><a href="perreo.html">Reyes del Perreo </a></li>
+            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li class="active"><a href="perreo.html">Reyes del Perreo </a></li>
+            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- ========================== -->
+    <!--  REYES DEL PERREO SECTION  -->
+    <!-- ========================== -->
+    <section class="perreo-section">
+        <h1 class="perreo-title"> Reyes del Perreo</h1>
+        <p class="perreo-subtitle">¡Vota por tu favorito! Tienes 3 votos disponibles</p>
+
+        <!-- Vote counter -->
+        <div class="vote-counter">
+            <span>🔥 Votos disponibles: <strong id="votesRemaining">3</strong>/3</span>
+        </div>
+
+        <!-- Alert message -->
+        <div id="alertMessage" class="alert-message" style="display: none;"></div>
+
+        <!-- ========================== -->
+        <!--  PODIO REY (TOP 3)         -->
+        <!-- ========================== -->
+        <h2 class="podium-section-title rey-title">🔥 Rey del Perreo</h2>
+        <div class="podium-container" id="podiumRey">
+            <div class="podium-slot podium-2nd">
+                <div class="podium-icon"><img src="img/medalla_plata.png" alt="2do lugar"></div>
+                <div class="podium-photo"><img src="" alt=""></div>
+                <div class="podium-name">---</div>
+                <div class="podium-votes">0 votos</div>
+                <div class="podium-base">2°</div>
+            </div>
+            <div class="podium-slot podium-1st">
+                <div class="podium-icon"><img src="img/corona_rey.png" alt="1er lugar"></div>
+                <div class="podium-photo"><img src="" alt=""></div>
+                <div class="podium-name">---</div>
+                <div class="podium-votes">0 votos</div>
+                <div class="podium-base">1°</div>
+            </div>
+            <div class="podium-slot podium-3rd">
+                <div class="podium-icon"><img src="img/medalla_bronce.png" alt="3er lugar"></div>
+                <div class="podium-photo"><img src="" alt=""></div>
+                <div class="podium-name">---</div>
+                <div class="podium-votes">0 votos</div>
+                <div class="podium-base">3°</div>
+            </div>
+        </div>
+
+        <!-- ========================== -->
+        <!--  PODIO REINA (TOP 3)       -->
+        <!-- ========================== -->
+        <h2 class="podium-section-title reina-title">👑 Reina del Perreo</h2>
+        <div class="podium-container" id="podiumReina">
+            <div class="podium-slot podium-2nd">
+                <div class="podium-icon"><img src="img/medalla_plata.png" alt="2do lugar"></div>
+                <div class="podium-photo"><img src="" alt=""></div>
+                <div class="podium-name">---</div>
+                <div class="podium-votes">0 votos</div>
+                <div class="podium-base">2°</div>
+            </div>
+            <div class="podium-slot podium-1st">
+                <div class="podium-icon"><img src="img/corona_reina.png" alt="1er lugar"></div>
+                <div class="podium-photo"><img src="" alt=""></div>
+                <div class="podium-name">---</div>
+                <div class="podium-votes">0 votos</div>
+                <div class="podium-base">1°</div>
+            </div>
+            <div class="podium-slot podium-3rd">
+                <div class="podium-icon"><img src="img/medalla_bronce.png" alt="3er lugar"></div>
+                <div class="podium-photo"><img src="" alt=""></div>
+                <div class="podium-name">---</div>
+                <div class="podium-votes">0 votos</div>
+                <div class="podium-base">3°</div>
+            </div>
+        </div>
+
+        <!-- ========================== -->
+        <!--  LISTA DE PARTICIPANTES    -->
+        <!-- ========================== -->
+        <h2 class="participants-title">🔥 Participantes - Reyes</h2>
+        <div class="participants-grid" id="participantsRey">
+            <div class="loading-spinner">Cargando participantes...</div>
+        </div>
+
+        <h2 class="participants-title">👑 Participantes - Reinas</h2>
+        <div class="participants-grid" id="participantsReina">
+            <div class="loading-spinner">Cargando participantes...</div>
+        </div>
+    </section>
+
+    <script src="js/supabase-config.js"></script>
+    <script src="js/perreo.js"></script>
+</body>
+</html>

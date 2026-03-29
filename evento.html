@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Evento - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li class="active"><a href="#evento">Evento</a></li>
+            <li><a href="perreo.html">Reyes del Perreo </a></li>
+            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li class="active"><a href="#evento">Evento</a></li>
+            <li><a href="perreo.html">Reyes del Perreo </a></li>
+            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- EVENT INFO SECTION -->
+    <section class="event-info">
+        <div class="event-info-container">
+            <div class="event-header">
+                <h2 class="event-name">SISTEMAS PARTY</h2>
+            </div>
+            <div class="event-grid">
+                <div class="event-card">
+                    <div class="event-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                            <path d="M7 12h5v5H7z"/>
+                        </svg>
+                    </div>
+                    <div class="event-card-label">Fecha</div>
+                    <div class="event-card-value">30 de Abril<br>2026</div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M12.5 7H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+                        </svg>
+                    </div>
+                    <div class="event-card-label">Hora</div>
+                    <div class="event-card-value">21:00 Hr</div>
+                </div>
+                <div class="event-card">
+                    <div class="event-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <div class="event-card-label">Locación</div>
+                    <div class="event-card-value">Salón Royal<br>Huatusco, Ver</div>
+                </div>
+            </div>
+            <div class="event-pricing">
+                <h3 class="pricing-title">
+                    <span class="pricing-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M22 10V6c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2v4c1.1 0 1.99.9 1.99 2s-.89 2-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c-1.1 0-2-.9-2-2s.9-2 2-2zm-2-1.46c-1.19.69-2 1.99-2 3.46s.81 2.77 2 3.46V18H4v-2.54c1.19-.69 2-1.99 2-3.46 0-1.48-.8-2.77-1.99-3.46L4 6h16v2.54zM11 15h2v2h-2zm0-4h2v2h-2zm0-4h2v2h-2z"/>
+                        </svg>
+                    </span>
+                    Precio de Boletos
+                </h3>
+                <div class="pricing-grid">
+                    <div class="price-item">
+                        <div class="price-type">General</div>
+                        <div class="price-amount">$180.00 MXN</div>
+                    </div>
+                    <div class="price-item">
+                        <div class="price-type">Mesa VIP</div>
+                        <div class="price-amount">$2,000.00 MXN</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESERVATION / TICKET INFO SECTION -->
+    <section class="reservation-section">
+        <div class="reservation-container">
+            <h2 class="reservation-title">Venta y Reserva de Boletos</h2>
+            <p class="reservation-text">Para reservar y comprar tus boletos, comunícate al WhatsApp:</p>
+            <ul class="reservation-whatsapp-list">
+                <li><img src="img/whatsapp.png" alt="WhatsApp" class="whatsapp-icon"> +52 55 2310 4531</li>
+                <li><img src="img/whatsapp.png" alt="WhatsApp" class="whatsapp-icon"> +52 27 123 4567</li>
+            </ul>
+            <p class="reservation-note">Envíanos un mensaje con el tipo de boleto requerido (General o Mesa VIP).</p>
+        </div>
+    </section>
+    <!-- LOCATION MAP SECTION -->
+    <section class="location-section">
+        <div class="location-container">
+            <div class="location-header">
+                <h2 class="location-title">Encuéntranos</h2>
+                <p class="location-subtitle">Salón Royal - Huatusco, Veracruz</p>
+                <p class="location-instruction">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M7 4v16l13-8z"/>
+                    </svg>
+                    Haz clic en el botón para ver la ubicación exacta
+                </p>
+            </div>
+            <div class="map-wrapper">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.8987654321!2d-96.96789!3d19.15234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c4e0a123456789%3A0x9876543210abcdef!2zU2Fsw7NuIFJveWFsIC0gVmVyYWNydXo!5e0!3m2!1ses-419!2smx!4v1736234567890!5m2!1ses-419!2smx"
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="map-iframe">
+                </iframe>
+                <a href="https://maps.app.goo.gl/4SjC21bwudS49MZG9" target="_blank" class="map-click-overlay" aria-label="Abrir ubicación en Google Maps"></a>
+                <div class="map-overlay"></div>
+                <div class="map-overlay-border"></div>
+                <a href="https://maps.app.goo.gl/4SjC21bwudS49MZG9" target="_blank" class="map-button" title="Ver ubicación en Google Maps">VER UBICACIÓN EN MAPA</a>
+            </div>
+            <div class="location-info">
+                <p class="location-note">Haz clic en el mapa o en el botón para abrir la ubicación en Google Maps.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="js/supabase-config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    // Mobile menu toggle logic
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        // Close menu on link click (for SPA-like behavior)
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+    </script>
+</body>
+</html>

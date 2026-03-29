@@ -1,3 +1,50 @@
+/* RESPONSIVE: LOCATION SECTION */
+@media (max-width: 768px) {
+    .location-section {
+        padding: 40px 5px;
+    }
+    .location-container {
+        padding: 20px 5px;
+        border-radius: 14px;
+    }
+    .location-title {
+        font-size: 2rem;
+        margin-bottom: 12px;
+    }
+    .location-subtitle {
+        font-size: 1rem;
+        margin-bottom: 18px;
+    }
+    .location-instruction {
+        font-size: 0.95rem;
+        margin-bottom: 18px;
+        gap: 8px;
+    }
+    .map-wrapper {
+        height: 220px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+        padding: 0;
+    }
+    .map-wrapper iframe {
+        height: 100%;
+        min-height: 180px;
+        border-radius: 10px;
+    }
+    .map-overlay-border, .map-overlay {
+        border-radius: 10px;
+    }
+    .map-button {
+        font-size: 0.95rem;
+        padding: 8px 16px;
+        border-radius: 30px;
+        bottom: 8px;
+    }
+    .location-info {
+        font-size: 0.95rem;
+        margin-top: 8px;
+    }
+}
 /* EVENT INFO SECTION */
 .event-info {
     background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);

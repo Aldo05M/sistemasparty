@@ -1,0 +1,121 @@
+body {
+  min-height: 100vh;
+  background: url('https://i.pinimg.com/1200x/05/1a/71/051a7122795f9b979941d702cdb4381d.jpg') center center/cover no-repeat !important;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: rgba(30,0,40,0.35);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+/* ========================== */
+/*  CONTACTO - NEON STYLE    */
+/* ========================== */
+.contact-section {
+  position: relative;
+  max-width: 480px;
+  margin: 80px auto 0 auto;
+  padding: 40px 24px 32px 24px;
+  background: rgba(30, 30, 40, 0.82);
+  border-radius: 24px;
+  box-shadow: 0 8px 48px 0 #0008, 0 0 0 #fff0;
+  z-index: 2;
+  text-align: center;
+  backdrop-filter: blur(0.5px);
+}
+.contact-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-shadow:
+    0 0 12px #ff00cc,
+    0 0 32px #00eaff,
+    0 0 48px #a259ff;
+  animation: sponsorsGlow 2.5s ease-in-out infinite alternate;
+}
+.contact-subtitle {
+  color: #e0e0e0;
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px #0008;
+}
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: rgba(40, 0, 60, 0.18);
+  border-radius: 16px;
+  padding: 16px 22px;
+  box-shadow: 0 0 18px #a259ff33;
+  min-width: 220px;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+}
+.contact-item img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px #fff8) brightness(1.08);
+}
+.contact-label {
+  font-size: 1.1rem;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+  text-align: center;
+}
+.contact-value {
+  font-size: 1.08rem;
+  color: #a5c9ff;
+  font-weight: 400;
+  word-break: break-all;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .contact-section {
+    margin: 40px 0 0 0;
+    padding: 24px 6vw 18px 6vw;
+    border-radius: 16px;
+  }
+  .contact-title {
+    font-size: 1.5rem;
+  }
+  .contact-item {
+    padding: 12px 10px;
+    gap: 12px;
+    min-width: 0;
+    max-width: 100vw;
+    justify-content: center;
+    text-align: center;
+  }
+  .contact-item img {
+    width: 30px;
+    height: 30px;
+  }
+  .contact-label {
+    font-size: 1rem;
+    text-align: center;
+  }
+  .contact-value {
+    font-size: 0.98rem;
+    text-align: center;
+  }
+}

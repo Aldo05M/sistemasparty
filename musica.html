@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pon tu Rola - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li><a href="perreo.html">Reyes del Perreo </a></li>
+            <li class="active"><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li><a href="perreo.html">Reyes del Perreo </a></li>
+            <li class="active"><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- NUEVA SECCIÓN: DJ SONG REQUEST -->
+    <section class="song-request-section" id="songRequestSection">
+      <div class="song-request-card">
+        <h2>Solicita una canción para el DJ</h2>
+        <div class="song-request-form">
+          <div class="song-input-wrapper">
+                        <input type="text" id="songName" placeholder="Nombre de la canción" autocomplete="off" aria-autocomplete="list">
+                        <div id="deezerSuggestions" class="deezer-suggestions"></div>
+                    </div>
+                    <input type="text" id="artistName" placeholder="Artista" autocomplete="off" readonly>
+                    <button id="addSongBtn" disabled>Agregar canción</button>
+        </div>
+        <div id="status" class="song-status"></div>
+        <div class="song-note">Puedes sugerir hasta 3 canciones por navegador. Una votación por canción.<br>Escribe el nombre y selecciona de las sugerencias para mejores resultados.</div>
+        <div id="songList" class="song-list"></div>
+      </div>
+    </section>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    // Mobile menu toggle logic
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+    </script>
+</body>
+</html>

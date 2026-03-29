@@ -57,6 +57,8 @@
     color: #fff;
     padding: 40px 50px;
     text-align: center;
+    position: relative;
+    z-index: 10;
 }
 
 .footer-content {

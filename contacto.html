@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contacto - Sistemas Party</title>
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/contacto.css">
+</head>
+<body>
+	<!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+	<nav class="main-menu-desktop">
+		<div class="logo">
+			SISTEMAS <span>PARTY</span>
+		</div>
+		<ul>
+			<li><a href="index.html">Inicio</a></li>
+			<li><a href="evento.html">Evento</a></li>
+			<li><a href="perreo.html">Reyes del Perreo </a></li>
+			<li><a href="musica.html">Pon tu Rola 🔥</a></li>
+			<li><a href="patrocinadores.html">Patrocinadores</a></li>
+			<li class="active"><a href="contacto.html">Contacto</a></li>
+		</ul>
+	</nav>
+	<!-- MOBILE MENU TOGGLE BUTTON -->
+	<button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+		<span></span>
+	</button>
+	<!-- MOBILE MENU -->
+	<nav class="mobile-menu" aria-label="Menú móvil">
+		<div class="logo">SISTEMAS <span>PARTY</span></div>
+		<ul>
+			<li><a href="index.html">Inicio</a></li>
+			<li><a href="evento.html">Evento</a></li>
+			<li><a href="perreo.html">Reyes del Perreo </a></li>
+			<li><a href="musica.html">Pon tu Rola 🔥</a></li>
+			<li><a href="patrocinadores.html">Patrocinadores</a></li>
+			<li class="active"><a href="contacto.html">Contacto</a></li>
+		</ul>
+	</nav>
+	<section class="contact-section">
+		</body>
+		<script>
+		// Lógica de menú móvil (idéntica a otras secciones)
+		document.addEventListener('DOMContentLoaded', function() {
+		  const menuToggle = document.querySelector('.mobile-menu-toggle');
+		  const mobileMenu = document.querySelector('.mobile-menu');
+		  if (menuToggle && mobileMenu) {
+			  menuToggle.addEventListener('click', function() {
+				  const isOpen = mobileMenu.classList.toggle('open');
+				  menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+			  });
+			  mobileMenu.querySelectorAll('a').forEach(link => {
+				  link.addEventListener('click', () => {
+					  mobileMenu.classList.remove('open');
+					  menuToggle.setAttribute('aria-expanded', 'false');
+				  });
+			  });
+		  }
+		});
+		</script>
+		<h2 class="contact-title">Contacto</h2>
+		<p class="contact-subtitle">¡Hablemos! Puedes contactarnos por cualquiera de estos medios:</p>
+		<div class="contact-list">
+			<a class="contact-item" href="https://wa.me/525523104531" target="_blank" rel="noopener">
+				<img src="img/whatsapp.png" alt="WhatsApp">
+				<div>
+					<div class="contact-label">WhatsApp</div>
+					<div class="contact-value">+52 55 2310 4531</div>
+				</div>
+			</a>
+			<a class="contact-item" href="https://instagram.com/sistemas_party_vol_2" target="_blank" rel="noopener">
+				<img src="img/instagram.png" alt="Instagram">
+				<div>
+					<div class="contact-label">Instagram</div>
+					<div class="contact-value">sistemas_party_vol_2</div>
+				</div>
+			</a>
+			<a class="contact-item" href="mailto:systemparty6@gmail.com">
+				<img src="img/gmail.png" alt="Correo">
+				<div>
+					<div class="contact-label">Correo</div>
+					<div class="contact-value">systemparty6@gmail.com</div>
+				</div>
+			</a>
+		</div>
+	</section>
+</body>
+</html>

@@ -22,3 +22,7 @@
 
 /* Responsive */
 @import url('responsive.css');
+
+/* Custom Menu Styles (imported last for override) */
+@import url('menu.css');
+@import url('mobile-menu.css');

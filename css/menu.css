@@ -1,0 +1,74 @@
+/* ========================== */
+/*  DESKTOP MAIN MENU         */
+/* ========================== */
+.main-menu-desktop {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,10,0.95);
+    margin: 0;
+    padding: 0 24px;
+    border-bottom: 1.5px solid #222;
+    box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2001;
+    height: 70px;
+}
+.main-menu-desktop ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: nowrap;
+    flex: 1;
+    justify-content: space-evenly;
+}
+.main-menu-desktop .logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+    margin-right: 20px;
+    user-select: none;
+    white-space: nowrap;
+}
+.main-menu-desktop .logo span {
+    color: #00F0FF;
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+body {
+    padding-top: 70px;
+}
+.main-menu-desktop li {
+    position: relative;
+}
+.main-menu-desktop a {
+    display: block;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+.main-menu-desktop li.active a,
+.main-menu-desktop a:hover {
+    background: #fff;
+    color: #222;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 900px) {
+    .main-menu-desktop {
+        display: none !important;
+    }
+}
+/* ========================== */

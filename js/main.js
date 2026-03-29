@@ -129,24 +129,21 @@ async function buscarDeezer(query) {
     if (deezerCache[query]) return deezerCache[query];
 
     try {
-        // Usamos un proxy CORS para evitar bloqueos desde el navegador
-        const url = `https://corsproxy.io/?${encodeURIComponent('https://api.deezer.com/search?q=' + encodeURIComponent(query) + '&limit=5')}`;
-        const resp = await fetch(url);
+        const resp = await fetch(`/api/spotify?q=${encodeURIComponent(query)}`);
         if (!resp.ok) throw new Error('Error en API');
         const json = await resp.json();
         const resultados = (json.data || []).map(track => ({
-            nombre: track.title,
-            artista: track.artist?.name || '',
-            deezer_id: track.id,
+            nombre: track.nombre,
+            artista: track.artista,
+            spotify_id: track.spotify_id,
             preview: track.preview,
-            album_cover: track.album?.cover_small || ''
+            album_cover: track.album_cover
         }));
-        // Guardar en cache
         deezerCache[query] = resultados;
         return resultados;
     } catch (err) {
-        console.warn('Deezer API error (modo manual disponible):', err);
-        return []; // Fallback: se permite agregar manualmente
+        console.warn('Spotify API error:', err);
+        return [];
     }
 }
 
@@ -362,14 +359,29 @@ async function addSong() {
             return;
         }
 
-        // 4. Buscar duplicados por deezer_id
-        const { data: existente, error: errBusca } = await supabaseClient
-            .from('canciones')
-            .select('*')
-            .eq('deezer_id', selectedSong.deezer_id)
-            .limit(1);
-
-        if (errBusca) throw errBusca;
+        // 4. Buscar duplicados por spotify_id (nuevo) o deezer_id (legacy, solo si es válido)
+        let orFilters = [];
+        if (selectedSong.spotify_id) {
+            orFilters.push(`spotify_id.eq.${selectedSong.spotify_id}`);
+        }
+        if (
+            selectedSong.deezer_id !== undefined &&
+            selectedSong.deezer_id !== null &&
+            selectedSong.deezer_id !== '' &&
+            !isNaN(Number(selectedSong.deezer_id))
+        ) {
+            orFilters.push(`deezer_id.eq.${Number(selectedSong.deezer_id)}`);
+        }
+        let existente = [];
+        if (orFilters.length) {
+            const { data, error: errBusca } = await supabaseClient
+                .from('canciones')
+                .select('*')
+                .or(orFilters.join(','))
+                .limit(1);
+            if (errBusca) throw errBusca;
+            existente = data;
+        }
 
         if (existente && existente.length) {
             // Ya existe → sumar voto
@@ -381,10 +393,19 @@ async function addSong() {
             if (updateError) throw updateError;
             showStatus('Canción existe: +1 voto');
         } else {
-            // No existe → insertar con deezer_id
+            // No existe → insertar con spotify_id (y legacy deezer_id si existe)
+            const insertObj = { nombre, artista, votos: 1, spotify_id: String(selectedSong.spotify_id || '') };
+            if (
+                selectedSong.deezer_id !== undefined &&
+                selectedSong.deezer_id !== null &&
+                selectedSong.deezer_id !== '' &&
+                !isNaN(Number(selectedSong.deezer_id))
+            ) {
+                insertObj.deezer_id = Number(selectedSong.deezer_id);
+            }
             const { error: insertError } = await supabaseClient
                 .from('canciones')
-                .insert([{ nombre, artista, votos: 1, deezer_id: selectedSong.deezer_id }]);
+                .insert([insertObj]);
             if (insertError) throw insertError;
             added.push({ nombre, artista, date: Date.now() });
             setStorage(STORAGE_KEY_ADDED, added);

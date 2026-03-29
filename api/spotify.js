@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
     clientId: process.env.SPOTIFY_CLIENT_ID,
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET
   });
+  console.log('Spotify API function started');
   try {
     const { q } = req.query;
     if (!q) {

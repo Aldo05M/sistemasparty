@@ -1,5 +1,10 @@
 // /api/spotify.js
 module.exports = async (req, res) => {
+  // Log temporal para depuración en Vercel
+  console.log('Vercel env:', {
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET
+  });
   try {
     const { q } = req.query;
     if (!q) {

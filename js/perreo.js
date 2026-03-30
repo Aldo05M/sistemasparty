@@ -3,12 +3,13 @@
 // ==========================
 
 const STORAGE_KEY_PERREO = 'perreo_votes';
-const MAX_PERREO_VOTES = 3;
+const MAX_PERREO_VOTES = 5;
 
 let participants = [];
 let userIP = '';
 let previousRey = null;
 let previousReina = null;
+let lastVotingEventId = null; // Para detectar cambio de ronda
 
 // ==========================
 //  UTILITIES
@@ -186,44 +187,101 @@ function renderGrid(gridId, list) {
 }
 
 // ==========================
-//  HANDLE VOTE
+//  HANDLE VOTE (con evento de votación)
 // ==========================
 
+async function fetchActiveVotingEvent() {
+    const { data, error } = await supabaseClient
+        .from('voting_events')
+        .select('*')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
+    if (error) {
+        console.error('Error obteniendo evento activo:', error);
+        return null;
+    }
+    // Si cambia el evento activo, limpia localStorage de votos
+    if (data && data.id && data.id !== lastVotingEventId) {
+        localStorage.removeItem(STORAGE_KEY_PERREO);
+        lastVotingEventId = data.id;
+    }
+    return data;
+}
+
 async function handleVote(participantId) {
+    console.log('[handleVote] Iniciando voto para participante:', participantId);
     const remaining = getRemainingVotes();
+    console.log('[handleVote] Votos restantes:', remaining);
     if (remaining <= 0) {
-        showAlert('❌ Ya usaste tus 3 votos', 'error');
+        showAlert('❌ Ya usaste tus 5 votos', 'error');
+        console.log('[handleVote] No quedan votos disponibles.');
         return;
     }
+
+    // Obtener evento activo
+    const votingEvent = await fetchActiveVotingEvent();
+    console.log('[handleVote] Evento activo:', votingEvent);
+    if (!votingEvent) {
+        showAlert('No hay evento de votación activo', 'error');
+        console.log('[handleVote] No hay evento activo.');
+        return;
+    }
+    const eventId = votingEvent.id;
 
     // Disable all buttons during request
     document.querySelectorAll('.vote-btn').forEach(btn => btn.disabled = true);
 
     try {
-        const { data, error } = await supabaseClient.rpc('vote_for_participant', {
-            p_participant_id: participantId,
-            p_ip: userIP
-        });
-
-        if (error) {
-            console.error('Vote error:', error);
+        // Ya no se verifica si ya votó por este participante, solo se limita el total de votos
+        console.log('[handleVote] Insertando voto en votes_log...');
+        const { error: insertError } = await supabaseClient
+            .from('votes_log')
+            .insert([
+                {
+                    participant_id: participantId,
+                    ip_address: userIP,
+                    voting_event_id: eventId
+                }
+            ]);
+        if (insertError) {
+            console.error('Error insertando voto:', insertError);
             showAlert('❌ Error al votar. Intenta de nuevo.', 'error');
             updateVoteUI();
             return;
         }
+        console.log('[handleVote] Voto insertado correctamente en votes_log.');
 
-        if (data && data.success === false) {
-            showAlert('❌ ' + (data.message || 'No se pudo registrar el voto'), 'error');
-            // Sync localStorage with server reality
-            updateVoteUI();
-            return;
+        // Actualizar contador de votos del participante (forma segura)
+        const { data: participant } = await supabaseClient
+            .from('participants')
+            .select('votes_count')
+            .eq('id', participantId)
+            .single();
+            const originalCount = (participant && participant.votes_count != null) ? participant.votes_count : 0;
+            console.log('[handleVote] Valor original votes_count:', originalCount);
+            const newCount = originalCount + 1;
+
+        const { data: updateData, error: updateError, status, statusText } = await supabaseClient
+            .from('participants')
+            .update({ votes_count: newCount })
+            .eq('id', participantId)
+            .select(); // Forzar retorno del registro actualizado
+        console.log('[handleVote] Resultado update:', { updateData, updateError, status, statusText });
+        if (updateError) {
+            console.error('[handleVote] Error al actualizar votes_count:', updateError);
+        } else if (!updateData || updateData.length === 0) {
+            console.warn('[handleVote] Update ejecutado pero no se modificó ningún registro.');
+        } else {
+            console.log('[handleVote] Contador de votos actualizado a:', updateData[0]?.votes_count);
         }
 
-        // Success
         saveLocalVote(participantId);
         showAlert('✅ ¡Voto registrado! 🔥', 'success');
         updateVoteUI();
         await fetchParticipants();
+        console.log('[handleVote] Proceso de voto finalizado.');
     } catch (err) {
         console.error('Network error:', err);
         showAlert('❌ Error de conexión. Intenta de nuevo.', 'error');

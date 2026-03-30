@@ -1,3 +1,84 @@
+// ==========================
+//  CAROUSEL SWIPE/DRAG LOGIC
+// ==========================
+document.addEventListener('DOMContentLoaded', function() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+
+    // Detecta si es touch (móvil/tablet)
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    if (!isTouchDevice) {
+        // Solo drag JS en escritorio
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let velocity = 0;
+        let lastX = 0;
+        let lastTime = 0;
+        let rafId = null;
+
+        track.addEventListener('mousedown', (e) => {
+            isDown = true;
+            track.classList.add('dragging');
+            startX = e.pageX - track.offsetLeft;
+            scrollLeft = track.scrollLeft;
+            lastX = e.pageX;
+            lastTime = Date.now();
+            cancelAnimationFrame(rafId);
+        });
+        track.addEventListener('mouseleave', () => {
+            if (isDown) {
+                isDown = false;
+                track.classList.remove('dragging');
+                applyInertia();
+            }
+        });
+        track.addEventListener('mouseup', () => {
+            if (isDown) {
+                isDown = false;
+                track.classList.remove('dragging');
+                applyInertia();
+            }
+        });
+        track.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - track.offsetLeft;
+            const walk = (x - startX);
+            track.scrollLeft = scrollLeft - walk;
+            // Inercia
+            const now = Date.now();
+            velocity = (e.pageX - lastX) / (now - lastTime + 1);
+            lastX = e.pageX;
+            lastTime = now;
+        });
+
+        function applyInertia() {
+            let v = velocity * 30; // Ajusta la fuerza de inercia
+            function animate() {
+                if (Math.abs(v) < 0.1) return;
+                track.scrollLeft -= v;
+                v *= 0.93; // Fricción
+                rafId = requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    }
+    // En móvil, scroll nativo horizontal (sin JS)
+
+    // --- Inercia suave ---
+    function applyInertia() {
+        let v = velocity * 30; // Ajusta la fuerza de inercia
+        function animate() {
+            if (Math.abs(v) < 0.1) return;
+            track.scrollLeft -= v;
+            v *= 0.93; // Fricción
+            rafId = requestAnimationFrame(animate);
+        }
+        animate();
+    }
+});
 // ========================== 
 //  COUNTDOWN TIMER FUNCTION
 // ========================== 

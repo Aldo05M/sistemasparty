@@ -172,4 +172,44 @@
     }
     </script>
 </body>
+<style>
+/* Responsive fix for WhatsApp reservation section */
+@media (max-width: 600px) {
+    .reservation-whatsapp-list {
+        width: 100%;
+        gap: 1rem;
+        padding: 0;
+    }
+    .reservation-whatsapp-list .whatsapp-btn-contacto {
+        width: 100%;
+        min-width: 0;
+        font-size: 1em;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0.8em 0.5em;
+        box-sizing: border-box;
+        justify-content: flex-start;
+    }
+    .reservation-whatsapp-list .whatsapp-btn-contacto img.whatsapp-icon {
+        width: 2em;
+        height: 2em;
+        margin-right: 0.7em;
+    }
+    .reservation-whatsapp-list .whatsapp-btn-contacto span {
+        font-size: 1em !important;
+        margin-left: 0.5em !important;
+        display: inline-block;
+    }
+    .reservation-whatsapp-list .whatsapp-btn-contacto br {
+        display: none;
+    }
+    .reservation-title, .reservation-text, .reservation-note {
+        text-align: center;
+        font-size: 1em;
+        padding-left: 0.2em;
+        padding-right: 0.2em;
+    }
+}
+</style>
+</body>
 </html>

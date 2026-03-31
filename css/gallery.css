@@ -63,7 +63,16 @@
 .carousel-track {
     display: flex;
     position: relative;
-    animation: scroll 35s linear infinite;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+    touch-action: pan-x;
+    will-change: scroll-position;
+    /* animation removida para permitir interacción */
+}
+.carousel-track.dragging {
+    cursor: grabbing;
 }
 
 .carousel-slide {
@@ -88,20 +97,21 @@
 }
 
 .triptych-item {
-    flex: 1;
+    flex: 1 1 300px;
+    max-width: 350px;
+    min-width: 220px;
     position: relative;
-    border-radius: 20px;
-    overflow: visible;
-    border: 3px solid #39FF14;
-    transition: all 0.4s ease;
+    border-radius: 18px;
+    overflow: hidden;
+    border: none;
+    transition: box-shadow 0.25s, transform 0.25s;
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    height: 400px;
-    box-shadow: 0 0 20px rgba(57, 255, 20, 0.4),
-                0 10px 40px rgba(0, 0, 0, 0.6),
-                inset 0 0 20px rgba(0, 240, 255, 0.1);
-    transform: none;
+    background: rgba(30, 34, 44, 0.92);
+    height: 380px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1.5px 8px rgba(80, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 /* Contenedor para el overflow de la película */
@@ -278,18 +288,16 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    right: 0;
-    padding: 25px;
-    background: linear-gradient(180deg, 
-        transparent 0%, 
-        rgba(0, 0, 0, 0.4) 30%,
-        rgba(0, 0, 0, 0.85) 100%);
-    backdrop-filter: blur(10px) saturate(180%);
+    width: 100%;
+    background: linear-gradient(0deg, rgba(0,0,0,0.68) 60%, transparent 100%);
+    padding: 18px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    z-index: 2;
     color: #fff;
-    transform: translateY(100%);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 4;
-    border-top: 2px solid rgba(57, 255, 20, 0.3);
+    text-align: center;
+    box-shadow: none;
+    transform: none;
+    transition: none;
 }
 
 .triptych-item:hover .triptych-overlay {
@@ -297,16 +305,30 @@
 }
 
 .triptych-caption {
-    font-size: 18px;
-    font-weight: 800;
-    color: #39FF14;
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 8px #000, 0 0 8px #00fff7;
     margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px #39FF14,
-                 0 0 20px #39FF14,
-                 0 2px 4px rgba(0, 0, 0, 0.8);
-    animation: captionGlow 2s ease-in-out infinite;
+    text-transform: none;
+    animation: none;
+@media (max-width: 900px) {
+    .carousel-slide {
+        min-width: 100%;
+        gap: 16px;
+        padding: 18px 0;
+    }
+    .triptych-item {
+        max-width: 90vw;
+        min-width: 60vw;
+        height: 220px;
+    }
+    .triptych-caption {
+        font-size: 1em;
+    }
+}
 }
 
 .carousel-controls {

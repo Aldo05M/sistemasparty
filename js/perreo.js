@@ -461,36 +461,45 @@ document.addEventListener('DOMContentLoaded', async () => {
         qrResults.textContent = '';
         if (qrScanner) qrScanner.clear();
         if (isMobile()) {
-            // Móvil: usar cámara SIEMPRE
-            try {
-                qrScanner = new Html5Qrcode('qr-reader');
-                qrScanner.start(
-                    { facingMode: 'environment' },
-                    { fps: 10, qrbox: 250 },
-                    async (decodedText) => {
-                        const votingEvent = await fetchActiveVotingEvent();
-                        if (!votingEvent || !votingEvent.qr_token) {
-                            qrResults.textContent = 'No hay evento activo o QR configurado.';
-                            return;
+            // Móvil: mostrar botón para pedir permiso explícito
+            qrReaderDiv.innerHTML = '';
+            const requestBtn = document.createElement('button');
+            requestBtn.textContent = 'Permitir acceso a la cámara';
+            requestBtn.style = 'padding:0.7em 1.5em; font-size:1em; border-radius:0.7em; background:#25d366; color:#181c20; border:none; margin-top:1em; cursor:pointer;';
+            requestBtn.onclick = () => {
+                requestBtn.disabled = true;
+                qrResults.textContent = 'Solicitando acceso a la cámara...';
+                try {
+                    qrScanner = new Html5Qrcode('qr-reader');
+                    qrScanner.start(
+                        { facingMode: 'environment' },
+                        { fps: 10, qrbox: 250 },
+                        async (decodedText) => {
+                            const votingEvent = await fetchActiveVotingEvent();
+                            if (!votingEvent || !votingEvent.qr_token) {
+                                qrResults.textContent = 'No hay evento activo o QR configurado.';
+                                return;
+                            }
+                            if (decodedText === votingEvent.qr_token) {
+                                setQrUnlocked(votingEvent.id);
+                                updateVoteUI();
+                                qrResults.textContent = '✅ QR válido. ¡Votación desbloqueada!';
+                                setTimeout(() => {
+                                    closeQrModalFunc();
+                                }, 1200);
+                            } else {
+                                qrResults.textContent = '❌ QR incorrecto. Intenta de nuevo.';
+                            }
+                        },
+                        (err) => {
+                            qrResults.textContent = '❌ No se pudo acceder a la cámara. Permite el acceso o intenta en otro navegador.';
                         }
-                        if (decodedText === votingEvent.qr_token) {
-                            setQrUnlocked(votingEvent.id);
-                            updateVoteUI();
-                            qrResults.textContent = '✅ QR válido. ¡Votación desbloqueada!';
-                            setTimeout(() => {
-                                closeQrModalFunc();
-                            }, 1200);
-                        } else {
-                            qrResults.textContent = '❌ QR incorrecto. Intenta de nuevo.';
-                        }
-                    },
-                    (err) => {
-                        qrResults.textContent = '❌ No se pudo acceder a la cámara. Permite el acceso o intenta en otro navegador.';
-                    }
-                );
-            } catch (e) {
-                qrResults.textContent = '❌ Error al inicializar la cámara. Permite el acceso o intenta en otro navegador.';
-            }
+                    );
+                } catch (e) {
+                    qrResults.textContent = '❌ Error al inicializar la cámara. Permite el acceso o intenta en otro navegador.';
+                }
+            };
+            qrReaderDiv.appendChild(requestBtn);
         } else {
             // PC: subir imagen
             fileInput.value = '';

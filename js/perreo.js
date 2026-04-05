@@ -511,38 +511,49 @@ document.addEventListener('DOMContentLoaded', async () => {
                 requestBtn.disabled = true;
                 qrResults.textContent = 'Solicitando acceso a la cámara...';
                 qrReaderDiv.innerHTML = '';
-                try {
-                    qrScanner = new Html5Qrcode('qr-reader');
-                    qrScanner.start(
-                        { facingMode: 'environment' },
-                        { fps: 10, qrbox: 250 },
-                        async (decodedText) => {
-                            const votingEvent = await fetchActiveVotingEvent();
-                            if (!votingEvent || !votingEvent.qr_token) {
-                                qrResults.textContent = 'No hay evento activo o QR configurado.';
-                                return;
+                // Paso 1: Forzar permiso usando getCameras()
+                Html5Qrcode.getCameras().then(cameras => {
+                    if (!cameras || cameras.length === 0) {
+                        qrResults.textContent = '❌ No se detectó ninguna cámara en el dispositivo.';
+                        openQrModal();
+                        return;
+                    }
+                    // Paso 2: Inicializar escáner con la primera cámara
+                    try {
+                        qrScanner = new Html5Qrcode('qr-reader');
+                        qrScanner.start(
+                            cameras[0].id,
+                            { fps: 10, qrbox: 250 },
+                            async (decodedText) => {
+                                const votingEvent = await fetchActiveVotingEvent();
+                                if (!votingEvent || !votingEvent.qr_token) {
+                                    qrResults.textContent = 'No hay evento activo o QR configurado.';
+                                    return;
+                                }
+                                if (decodedText === votingEvent.qr_token) {
+                                    setQrUnlocked(votingEvent.id);
+                                    updateVoteUI();
+                                    qrResults.textContent = '✅ QR válido. ¡Votación desbloqueada!';
+                                    setTimeout(() => {
+                                        closeQrModalFunc();
+                                    }, 1200);
+                                } else {
+                                    qrResults.textContent = '❌ QR incorrecto. Intenta de nuevo.';
+                                }
+                            },
+                            (err) => {
+                                qrResults.textContent = '❌ No se pudo acceder a la cámara. Permite el acceso o intenta en otro navegador.';
+                                openQrModal();
                             }
-                            if (decodedText === votingEvent.qr_token) {
-                                setQrUnlocked(votingEvent.id);
-                                updateVoteUI();
-                                qrResults.textContent = '✅ QR válido. ¡Votación desbloqueada!';
-                                setTimeout(() => {
-                                    closeQrModalFunc();
-                                }, 1200);
-                            } else {
-                                qrResults.textContent = '❌ QR incorrecto. Intenta de nuevo.';
-                            }
-                        },
-                        (err) => {
-                            qrResults.textContent = '❌ No se pudo acceder a la cámara. Permite el acceso o intenta en otro navegador.';
-                            // Si falla, vuelve a mostrar los botones
-                            openQrModal();
-                        }
-                    );
-                } catch (e) {
-                    qrResults.textContent = '❌ Error al inicializar la cámara. Permite el acceso o intenta en otro navegador.';
+                        );
+                    } catch (e) {
+                        qrResults.textContent = '❌ Error al inicializar la cámara. Permite el acceso o intenta en otro navegador.';
+                        openQrModal();
+                    }
+                }).catch((err) => {
+                    qrResults.textContent = '❌ No se pudo acceder a la cámara. Permite el acceso o intenta en otro navegador.';
                     openQrModal();
-                }
+                });
             };
         } else {
             // PC: subir imagen

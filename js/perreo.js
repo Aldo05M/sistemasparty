@@ -461,14 +461,56 @@ document.addEventListener('DOMContentLoaded', async () => {
         qrResults.textContent = '';
         if (qrScanner) qrScanner.clear();
         if (isMobile()) {
-            // Móvil: mostrar botón para pedir permiso explícito
+            // Móvil: solo botón para pedir permiso explícito
             qrReaderDiv.innerHTML = '';
             const requestBtn = document.createElement('button');
             requestBtn.textContent = 'Permitir acceso a la cámara';
             requestBtn.style = 'padding:0.7em 1.5em; font-size:1em; border-radius:0.7em; background:#25d366; color:#181c20; border:none; margin-top:1em; cursor:pointer;';
+            qrReaderDiv.appendChild(requestBtn);
+            // Fallback: botón para subir imagen si la cámara falla
+            const fallbackBtn = document.createElement('button');
+            fallbackBtn.textContent = 'Subir imagen QR';
+            fallbackBtn.style = 'padding:0.7em 1.5em; font-size:1em; border-radius:0.7em; background:#23272f; color:#fff; border:2px solid #25d366; margin-top:1em; margin-left:1em; cursor:pointer;';
+            fallbackBtn.onclick = () => {
+                // Crear input file temporal
+                const tempInput = document.createElement('input');
+                tempInput.type = 'file';
+                tempInput.accept = 'image/*';
+                tempInput.style.display = 'none';
+                tempInput.onchange = async (e) => {
+                    if (!tempInput.files || tempInput.files.length === 0) return;
+                    const file = tempInput.files[0];
+                    qrScanner = new Html5Qrcode('qr-reader');
+                    qrScanner.scanFile(file, true)
+                        .then(async (decodedText) => {
+                            const votingEvent = await fetchActiveVotingEvent();
+                            if (!votingEvent || !votingEvent.qr_token) {
+                                qrResults.textContent = 'No hay evento activo o QR configurado.';
+                                return;
+                            }
+                            if (decodedText === votingEvent.qr_token) {
+                                setQrUnlocked(votingEvent.id);
+                                updateVoteUI();
+                                qrResults.textContent = '✅ QR válido. ¡Votación desbloqueada!';
+                                setTimeout(() => {
+                                    closeQrModalFunc();
+                                }, 1200);
+                            } else {
+                                qrResults.textContent = '❌ QR incorrecto. Intenta de nuevo.';
+                            }
+                        })
+                        .catch(() => {
+                            qrResults.textContent = '❌ No se pudo leer el QR. Intenta con otra imagen.';
+                        });
+                };
+                document.body.appendChild(tempInput);
+                tempInput.click();
+            };
+            qrReaderDiv.appendChild(fallbackBtn);
             requestBtn.onclick = () => {
                 requestBtn.disabled = true;
                 qrResults.textContent = 'Solicitando acceso a la cámara...';
+                qrReaderDiv.innerHTML = '';
                 try {
                     qrScanner = new Html5Qrcode('qr-reader');
                     qrScanner.start(
@@ -493,13 +535,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                         },
                         (err) => {
                             qrResults.textContent = '❌ No se pudo acceder a la cámara. Permite el acceso o intenta en otro navegador.';
+                            // Si falla, vuelve a mostrar los botones
+                            openQrModal();
                         }
                     );
                 } catch (e) {
                     qrResults.textContent = '❌ Error al inicializar la cámara. Permite el acceso o intenta en otro navegador.';
+                    openQrModal();
                 }
             };
-            qrReaderDiv.appendChild(requestBtn);
         } else {
             // PC: subir imagen
             fileInput.value = '';

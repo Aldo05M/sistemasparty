@@ -511,8 +511,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 requestBtn.disabled = true;
                 qrResults.textContent = 'Solicitando acceso a la cámara...';
                 qrReaderDiv.innerHTML = '';
-                // Paso 1: Forzar permiso usando getCameras()
+                // Paso 1: Forzar permiso usando getCameras() con timeout
+                let timeoutId = setTimeout(() => {
+                    qrResults.textContent = '❌ Tiempo de espera agotado. El navegador no respondió al solicitar la cámara.';
+                    openQrModal();
+                }, 7000);
                 Html5Qrcode.getCameras().then(cameras => {
+                    clearTimeout(timeoutId);
                     if (!cameras || cameras.length === 0) {
                         qrResults.textContent = '❌ No se detectó ninguna cámara en el dispositivo.';
                         openQrModal();
@@ -551,7 +556,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                         openQrModal();
                     }
                 }).catch((err) => {
-                    qrResults.textContent = '❌ No se pudo acceder a la cámara. Permite el acceso o intenta en otro navegador.';
+                    clearTimeout(timeoutId);
+                    qrResults.textContent = '❌ Error al solicitar la cámara: ' + (err && err.message ? err.message : err);
                     openQrModal();
                 });
             };

@@ -2,6 +2,32 @@
 //  CAROUSEL SWIPE/DRAG LOGIC
 // ==========================
 document.addEventListener('DOMContentLoaded', function() {
+    // Fade transition for menu navigation
+    function addMenuFadeTransition() {
+        // Applies to both desktop and mobile menus
+        const menus = document.querySelectorAll('.main-menu-desktop a, .mobile-menu a');
+        menus.forEach(link => {
+            // Only for internal links
+            if (link.target === '' && link.href && link.origin === window.location.origin) {
+                link.addEventListener('click', function(e) {
+                    // Ignore anchor links (same page)
+                    if (link.getAttribute('href').startsWith('#')) return;
+                    e.preventDefault();
+                    document.body.classList.add('fade-out');
+                    setTimeout(() => {
+                        window.location.href = link.href;
+                    }, 400);
+                });
+            }
+        });
+        // On load, fade in
+        document.body.classList.add('fade-in');
+        document.body.style.opacity = 0;
+        setTimeout(() => {
+            document.body.style.opacity = 1;
+        }, 10);
+    }
+    addMenuFadeTransition();
     const track = document.getElementById('carouselTrack');
     if (!track) return;
 

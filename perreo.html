@@ -17,8 +17,8 @@
         <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="evento.html">Evento</a></li>
-            <li class="active"><a href="perreo.html">Reyes del Perreo </a></li>
-            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li class="active"><a href="perreo.html">Reyes de la noche </a></li>
+            <li><a href="musica.html">Playlist Oficial</a></li>
             <li><a href="patrocinadores.html">Patrocinadores</a></li>
             <li><a href="contacto.html">Contacto</a></li>
         </ul>
@@ -33,8 +33,8 @@
         <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="evento.html">Evento</a></li>
-            <li class="active"><a href="perreo.html">Reyes del Perreo </a></li>
-            <li><a href="musica.html">Pon tu Rola 🔥</a></li>
+            <li class="active"><a href="perreo.html">Reyes de la noche </a></li>
+            <li><a href="musica.html">Playlist Oficial</a></li>
             <li><a href="patrocinadores.html">Patrocinadores</a></li>
             <li><a href="contacto.html">Contacto</a></li>
         </ul>
@@ -45,11 +45,26 @@
     <!-- ========================== -->
     <section class="perreo-section">
         <h1 class="perreo-title"> Reyes del Perreo</h1>
-        <p class="perreo-subtitle">¡Vota por tu favorito! Tienes 3 votos disponibles</p>
+        <p class="perreo-subtitle">¡Vota por tu favorito! Tienes 5 votos disponibles</p>
+
+        <!-- QR Unlock Voting -->
+        <div class="qr-unlock-container" style="text-align:center; margin-bottom:1.5em;">
+            <button id="scanQrBtn" class="qr-btn" style="padding:0.7em 2em; font-size:1.1em; border-radius:1em; background:#23272f; color:#fff; border:2px solid #25d366; box-shadow:0 2px 16px #25d36655; cursor:pointer;">🔓 Escanear QR para votar</button>
+            <div id="qrStatusMsg" style="margin-top:0.7em; color:#25d366; font-weight:bold;"></div>
+        </div>
+
+        <!-- Modal QR Scanner -->
+        <div id="qrModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); align-items:center; justify-content:center;">
+            <div style="background:#181c20; padding:1.5em 1em; border-radius:1.2em; max-width:95vw; max-height:90vh; position:relative;">
+                <button id="closeQrModal" style="position:absolute; top:0.5em; right:0.7em; background:none; border:none; color:#fff; font-size:2em; cursor:pointer;">&times;</button>
+                <div id="qr-reader" style="width:320px; max-width:80vw;"></div>
+                <div id="qr-reader-results" style="color:#fff; margin-top:1em;"></div>
+            </div>
+        </div>
 
         <!-- Vote counter -->
         <div class="vote-counter">
-            <span>🔥 Votos disponibles: <strong id="votesRemaining">3</strong>/3</span>
+            <span>🔥 Votos disponibles: <strong id="votesRemaining">5</strong>/5</span>
         </div>
 
         <!-- Alert message -->
@@ -125,7 +140,12 @@
         </div>
     </section>
 
+    <!-- QR Scanner library (html5-qrcode) -->
+    <script src="https://unpkg.com/html5-qrcode@2.3.10/html5-qrcode.min.js"></script>
     <script src="js/supabase-config.js"></script>
     <script src="js/perreo.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
 </body>
 </html>

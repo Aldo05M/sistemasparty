@@ -211,79 +211,58 @@ async function fetchActiveVotingEvent() {
 }
 
 async function handleVote(participantId) {
-    console.log('[handleVote] Iniciando voto para participante:', participantId);
-    const remaining = getRemainingVotes();
-    console.log('[handleVote] Votos restantes:', remaining);
-    if (remaining <= 0) {
-        showAlert('❌ Ya usaste tus 5 votos', 'error');
-        console.log('[handleVote] No quedan votos disponibles.');
-        return;
-    }
-
-    // Obtener evento activo
+    // Bloqueo por QR
     const votingEvent = await fetchActiveVotingEvent();
-    console.log('[handleVote] Evento activo:', votingEvent);
     if (!votingEvent) {
         showAlert('No hay evento de votación activo', 'error');
-        console.log('[handleVote] No hay evento activo.');
         return;
     }
     const eventId = votingEvent.id;
-
+    if (!isQrUnlockedForEvent(eventId)) {
+        showAlert('Debes escanear el QR para votar', 'error');
+        return;
+    }
+    const remaining = getRemainingVotes();
+    if (remaining <= 0) {
+        showAlert('❌ Ya usaste tus 5 votos', 'error');
+        return;
+    }
     // Disable all buttons during request
     document.querySelectorAll('.vote-btn').forEach(btn => btn.disabled = true);
-
     try {
-        // Ya no se verifica si ya votó por este participante, solo se limita el total de votos
-        console.log('[handleVote] Insertando voto en votes_log...');
         const { error: insertError } = await supabaseClient
             .from('votes_log')
             .insert([
                 {
                     participant_id: participantId,
                     ip_address: userIP,
-                    voting_event_id: eventId
+                    voting_event_id: eventId,
+                    qr_validated: true
                 }
             ]);
         if (insertError) {
-            console.error('Error insertando voto:', insertError);
             showAlert('❌ Error al votar. Intenta de nuevo.', 'error');
             updateVoteUI();
             return;
         }
-        console.log('[handleVote] Voto insertado correctamente en votes_log.');
-
         // Actualizar contador de votos del participante (forma segura)
         const { data: participant } = await supabaseClient
             .from('participants')
             .select('votes_count')
             .eq('id', participantId)
             .single();
-            const originalCount = (participant && participant.votes_count != null) ? participant.votes_count : 0;
-            console.log('[handleVote] Valor original votes_count:', originalCount);
-            const newCount = originalCount + 1;
-
-        const { data: updateData, error: updateError, status, statusText } = await supabaseClient
+        const originalCount = (participant && participant.votes_count != null) ? participant.votes_count : 0;
+        const newCount = originalCount + 1;
+        const { data: updateData, error: updateError } = await supabaseClient
             .from('participants')
             .update({ votes_count: newCount })
             .eq('id', participantId)
-            .select(); // Forzar retorno del registro actualizado
-        console.log('[handleVote] Resultado update:', { updateData, updateError, status, statusText });
-        if (updateError) {
-            console.error('[handleVote] Error al actualizar votes_count:', updateError);
-        } else if (!updateData || updateData.length === 0) {
-            console.warn('[handleVote] Update ejecutado pero no se modificó ningún registro.');
-        } else {
-            console.log('[handleVote] Contador de votos actualizado a:', updateData[0]?.votes_count);
-        }
-
+            .select();
         saveLocalVote(participantId);
         showAlert('✅ ¡Voto registrado! 🔥', 'success');
         updateVoteUI();
         await fetchParticipants();
-        console.log('[handleVote] Proceso de voto finalizado.');
     } catch (err) {
-        console.error('Network error:', err);
         showAlert('❌ Error de conexión. Intenta de nuevo.', 'error');
         updateVoteUI();
     }
@@ -297,10 +276,26 @@ function updateVoteUI() {
     const remaining = getRemainingVotes();
     const counterEl = document.getElementById('votesRemaining');
     if (counterEl) counterEl.textContent = remaining;
-
+    // Bloqueo por QR
+    const votingEvent = lastVotingEventId ? { id: lastVotingEventId } : null;
+    let qrOk = true;
+    if (votingEvent) {
+        qrOk = isQrUnlockedForEvent(votingEvent.id);
+    }
     document.querySelectorAll('.vote-btn').forEach(btn => {
-        btn.disabled = remaining <= 0;
+        btn.disabled = (remaining <= 0) || !qrOk;
     });
+    // Mensaje de QR
+    const qrStatusMsg = document.getElementById('qrStatusMsg');
+    if (qrStatusMsg) {
+        if (!qrOk) {
+            qrStatusMsg.textContent = 'Debes escanear el QR para habilitar la votación.';
+            qrStatusMsg.style.color = '#ff5252';
+        } else {
+            qrStatusMsg.textContent = '¡Votación desbloqueada!';
+            qrStatusMsg.style.color = '#25d366';
+        }
+    }
 }
 
 // ==========================

@@ -1,0 +1,111 @@
+# Instrucciones para usar la API de Spotify en tu proyecto (local y Vercel)
+
+---
+
+## 0. Agregar columna spotify_id en Supabase
+
+Antes de usar la integración con Spotify, asegúrate de que tu tabla `canciones` en Supabase tenga la columna `spotify_id` (tipo `text`).
+
+Puedes hacerlo de dos formas:
+
+### Opción A: Usando la consola SQL de Supabase
+
+1. Ve a https://app.supabase.com/ y entra a tu proyecto.
+2. En el menú izquierdo, haz clic en "SQL editor".
+3. Copia y ejecuta este comando:
+   ```sql
+   alter table canciones add column if not exists spotify_id text;
+   ```
+4. Verifica que la columna se haya creado correctamente.
+
+### Opción B: Usando la interfaz gráfica
+
+1. Ve a "Table editor" y selecciona la tabla `canciones`.
+2. Haz clic en "+ Add column".
+3. Nombre: `spotify_id`, Tipo: `text` (o `varchar`).
+4. Guarda los cambios.
+
+---
+
+---
+
+## 1. Crear la app en Spotify Developers
+
+1. Ve a https://developer.spotify.com/dashboard/applications
+2. Haz clic en "Create an App".
+3. Pon un nombre y descripción (ejemplo: "Sistemas Party Song Search").
+4. En Website pon tu dominio (ejemplo: https://sistemaparty.com)
+5. **NO necesitas Redirect URI** para búsquedas (client_credentials). Si te pide uno, pon tu dominio/callback, pero no se usará.
+6. Guarda y copia tu **Client ID** y **Client Secret**.
+
+---
+
+## 2. Variables de entorno necesarias
+
+- `SPOTIFY_CLIENT_ID`  → tu Client ID de Spotify
+- `SPOTIFY_CLIENT_SECRET`  → tu Client Secret de Spotify
+
+---
+15553ce60fe242498a69af4ee74fbb3c
+97c3c420b36c4597a244c2d1ae5e1e94
+
+$env:SPOTIFY_CLIENT_ID="15553ce60fe242498a69af4ee74fbb3c"
+$env:SPOTIFY_CLIENT_SECRET="97c3c420b36c4597a244c2d1ae5e1e94"
+vercel dev
+## 3. Probar en local
+
+1. Crea el archivo `/api/spotify.js` en tu proyecto con el código proporcionado.
+2. Instala Vercel CLI si no lo tienes:
+   ```sh
+   npm install -g vercel
+   ```
+3. En la terminal, navega a la carpeta de tu proyecto.
+4. Exporta las variables de entorno antes de iniciar el servidor:
+   - En Linux/Mac:
+     ```sh
+     export SPOTIFY_CLIENT_ID=tu_client_id
+     export SPOTIFY_CLIENT_SECRET=tu_client_secret
+     vercel dev
+     ```
+   - En Windows PowerShell:
+     ```powershell
+     $env:SPOTIFY_CLIENT_ID="tu_client_id"
+     $env:SPOTIFY_CLIENT_SECRET="tu_client_secret"
+     vercel dev
+     ```
+5. Tu frontend hará fetch a `/api/spotify?q=...` y funcionará igual que en producción.
+
+---
+
+## 4. Desplegar en Vercel
+
+1. Sube tu proyecto a GitHub (o conecta tu repo a Vercel).
+2. Entra a https://vercel.com/ y crea un nuevo proyecto con tu repo.
+3. En el dashboard de Vercel, ve a "Settings" > "Environment Variables".
+4. Agrega:
+   - `SPOTIFY_CLIENT_ID`  → tu Client ID
+   - `SPOTIFY_CLIENT_SECRET`  → tu Client Secret
+5. Haz deploy.
+6. Tu API estará disponible en `https://tudominio.vercel.app/api/spotify?q=...`
+
+---
+
+## 5. Notas importantes
+
+- No necesitas login de usuario ni redirect URI para búsquedas de canciones.
+- Si cambias de dominio, actualiza el Website en Spotify Dashboard (no es obligatorio para client_credentials, pero recomendable).
+- Si tienes errores de credenciales, revisa que las variables estén bien escritas y sin espacios extra.
+- Si tienes dudas, revisa la documentación oficial: https://developer.spotify.com/documentation/web-api/tutorials/client-credentials-flow
+
+---
+
+¡Listo! Así puedes buscar canciones de Spotify desde tu web, tanto en local como en producción.
+
+2. Configura las variables de entorno en Vercel
+Ve a tu proyecto en https://vercel.com/
+Entra a tu dashboard y selecciona tu proyecto.
+Ve a Settings > Environment Variables.
+Agrega estas variables (si no existen):
+SPOTIFY_CLIENT_ID → tu Client ID de Spotify
+SPOTIFY_CLIENT_SECRET → tu Client Secret de Spotify
+Guarda los cambios.

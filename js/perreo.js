@@ -2,8 +2,12 @@
 //  REYES DEL PERREO - VOTING SYSTEM
 // ==========================
 
+
 const STORAGE_KEY_PERREO = 'perreo_votes';
 const MAX_PERREO_VOTES = 5;
+const STORAGE_KEY_QR_UNLOCK = 'perreo_qr_unlocked';
+let qrUnlocked = false;
+let currentQrToken = null;
 
 let participants = [];
 let userIP = '';
@@ -39,9 +43,30 @@ async function getUserIP() {
     }
 }
 
+
 // ==========================
-//  LOCAL VOTE TRACKING
+//  QR VOTING UNLOCK LOGIC
 // ==========================
+
+function isQrUnlockedForEvent(eventId) {
+    // Save per event, so si cambia el evento, se requiere nuevo QR
+    const unlocked = localStorage.getItem(STORAGE_KEY_QR_UNLOCK);
+    if (!unlocked) return false;
+    try {
+        const obj = JSON.parse(unlocked);
+        return obj && obj.eventId === eventId && obj.unlocked === true;
+    } catch { return false; }
+}
+
+function setQrUnlocked(eventId) {
+    localStorage.setItem(STORAGE_KEY_QR_UNLOCK, JSON.stringify({ eventId, unlocked: true }));
+    qrUnlocked = true;
+}
+
+function resetQrUnlock() {
+    localStorage.removeItem(STORAGE_KEY_QR_UNLOCK);
+    qrUnlocked = false;
+}
 
 function getLocalVotes() {
     const stored = localStorage.getItem(STORAGE_KEY_PERREO);
@@ -202,11 +227,13 @@ async function fetchActiveVotingEvent() {
         console.error('Error obteniendo evento activo:', error);
         return null;
     }
-    // Si cambia el evento activo, limpia localStorage de votos
+    // Si cambia el evento activo, limpia localStorage de votos y QR
     if (data && data.id && data.id !== lastVotingEventId) {
         localStorage.removeItem(STORAGE_KEY_PERREO);
+        resetQrUnlock();
         lastVotingEventId = data.id;
     }
+    currentQrToken = data.qr_token || null;
     return data;
 }
 
@@ -392,13 +419,120 @@ function initMobileMenu() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     initMobileMenu();
-
     // Show loading state
     const grid = document.getElementById('participantsGrid');
     if (grid) grid.innerHTML = '<div class="loading-spinner">Cargando participantes...</div>';
-
     // Get IP and fetch data
     userIP = await getUserIP();
     await fetchParticipants();
     setupRealtime();
+
+    // QR Unlock logic
+    let qrScanner = null;
+    const scanBtn = document.getElementById('scanQrBtn');
+    const qrModal = document.getElementById('qrModal');
+    const closeQrModal = document.getElementById('closeQrModal');
+    const qrReaderDiv = document.getElementById('qr-reader');
+    const qrResults = document.getElementById('qr-reader-results');
+
+    // Detectar si es móvil
+    function isMobile() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // Cambiar texto del botón según dispositivo
+    if (scanBtn) {
+        scanBtn.textContent = isMobile() ? '🔓 Escanear QR para votar' : '🔓 Subir imagen QR para votar';
+    }
+
+    // Crear input file para PC
+    let fileInput = null;
+    if (!isMobile()) {
+        fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*';
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput);
+    }
+
+    // Helper: open/close modal
+    function openQrModal() {
+        qrModal.style.display = 'flex';
+        qrResults.textContent = '';
+        if (qrScanner) qrScanner.clear();
+        if (isMobile()) {
+            // Móvil: usar cámara
+            qrScanner = new Html5Qrcode('qr-reader');
+            qrScanner.start(
+                { facingMode: 'environment' },
+                { fps: 10, qrbox: 250 },
+                async (decodedText) => {
+                    const votingEvent = await fetchActiveVotingEvent();
+                    if (!votingEvent || !votingEvent.qr_token) {
+                        qrResults.textContent = 'No hay evento activo o QR configurado.';
+                        return;
+                    }
+                    if (decodedText === votingEvent.qr_token) {
+                        setQrUnlocked(votingEvent.id);
+                        updateVoteUI();
+                        qrResults.textContent = '✅ QR válido. ¡Votación desbloqueada!';
+                        setTimeout(() => {
+                            closeQrModalFunc();
+                        }, 1200);
+                    } else {
+                        qrResults.textContent = '❌ QR incorrecto. Intenta de nuevo.';
+                    }
+                },
+                (err) => {
+                    // ignore
+                }
+            );
+        } else {
+            // PC: subir imagen
+            fileInput.value = '';
+            fileInput.onchange = async (e) => {
+                if (!fileInput.files || fileInput.files.length === 0) return;
+                const file = fileInput.files[0];
+                qrScanner = new Html5Qrcode('qr-reader');
+                qrScanner.scanFile(file, true)
+                    .then(async (decodedText) => {
+                        const votingEvent = await fetchActiveVotingEvent();
+                        if (!votingEvent || !votingEvent.qr_token) {
+                            qrResults.textContent = 'No hay evento activo o QR configurado.';
+                            return;
+                        }
+                        if (decodedText === votingEvent.qr_token) {
+                            setQrUnlocked(votingEvent.id);
+                            updateVoteUI();
+                            qrResults.textContent = '✅ QR válido. ¡Votación desbloqueada!';
+                            setTimeout(() => {
+                                closeQrModalFunc();
+                            }, 1200);
+                        } else {
+                            qrResults.textContent = '❌ QR incorrecto. Intenta de nuevo.';
+                        }
+                    })
+                    .catch(() => {
+                        qrResults.textContent = '❌ No se pudo leer el QR. Intenta con otra imagen.';
+                    });
+            };
+            fileInput.click();
+        }
+    }
+    function closeQrModalFunc() {
+        qrModal.style.display = 'none';
+        if (qrScanner) {
+            qrScanner.stop().then(() => qrScanner.clear());
+        }
+    }
+    if (scanBtn && qrModal && closeQrModal) {
+        scanBtn.addEventListener('click', openQrModal);
+        closeQrModal.addEventListener('click', closeQrModalFunc);
+        qrModal.addEventListener('click', (e) => {
+            if (e.target === qrModal) closeQrModalFunc();
+        });
+    }
+    // Inicializa estado de QR
+    await fetchActiveVotingEvent();
+    updateVoteUI();
 });

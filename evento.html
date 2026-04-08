@@ -211,5 +211,27 @@
     }
 }
 </style>
+<style>
+@media (max-width: 970px) {
+    .main-menu-desktop {
+        background: #111 !important;
+        color: #fff !important;
+        border-bottom: 1.5px solid #222 !important;
+        box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18) !important;
+    }
+    .main-menu-desktop .logo,
+    .main-menu-desktop ul li a {
+        color: #fff !important;
+        text-shadow: 0 0 8px #000a !important;
+    }
+    /* Elevar la primera sección para cubrir el navbar en móvil */
+    .event-info {
+        margin-top: -64px !important;
+        padding-top: 88px !important;
+        z-index: 1;
+        position: relative;
+    }
+}
+</style>
 </body>
 </html>

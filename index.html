@@ -27,7 +27,7 @@
     <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
         <span></span>
     </button>
-    <!-- MOBILE MENU -->
+    <!-- MOBILE MENU (off-canvas) -->
     <nav class="mobile-menu" aria-label="Menú móvil">
         <div class="logo">SISTEMAS <span>PARTY</span></div>
         <ul>
@@ -39,6 +39,8 @@
             <li><a href="contacto.html">Contacto</a></li>
         </ul>
     </nav>
+    <!-- Overlay for mobile menu -->
+    <div class="mobile-menu-overlay"></div>
     <!-- HERO SECTION -->
     <section class="hero">
         <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1920&h=1080&fit=crop" alt="Disco Background" class="hero-bg">
@@ -283,22 +285,47 @@
         </div>
     </footer>
 <script>
-// Mobile menu toggle logic
+// Mobile menu toggle logic (modern off-canvas)
 const menuToggle = document.querySelector('.mobile-menu-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
+const menuOverlay = document.querySelector('.mobile-menu-overlay');
+function openMobileMenu() {
+    mobileMenu.classList.add('open');
+    document.body.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    if (menuOverlay) menuOverlay.style.display = 'block';
+}
+function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    if (menuOverlay) menuOverlay.style.display = 'none';
+}
 if (menuToggle && mobileMenu) {
     menuToggle.addEventListener('click', function() {
-        const isOpen = mobileMenu.classList.toggle('open');
-        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (mobileMenu.classList.contains('open')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
     });
     // Close menu on link click (for SPA-like behavior)
     mobileMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenu.classList.remove('open');
-            menuToggle.setAttribute('aria-expanded', 'false');
+            closeMobileMenu();
         });
     });
 }
+// Close menu when clicking outside (on overlay)
+if (menuOverlay) {
+    menuOverlay.addEventListener('click', closeMobileMenu);
+}
+// Close menu with ESC key
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        closeMobileMenu();
+    }
+});
 </script>
 </body>
 </html>

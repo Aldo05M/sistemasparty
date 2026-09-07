@@ -1,0 +1,152 @@
+/* Estilos exclusivos de evento.html: tema nocturno. */
+.night-page {
+    --night-bg: #080a10;
+    --night-panel: #101620;
+    --night-text: #f3f7fb;
+    --night-muted: #aebdcc;
+    --night-blue: #a0e6ff;
+    --night-border: rgba(169, 203, 234, .16);
+    background: var(--night-bg) !important; /* Overrides the shared page background. */
+    color: var(--night-text);
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+.night-page::before { content: none; }
+.night-page main { overflow: clip; }
+.night-page section[id] { scroll-margin-top: 96px; }
+.night-shell { width: min(1120px, calc(100% - 80px)); margin-inline: auto; }
+.night-hero { position: relative; isolation: isolate; padding: 80px 0 64px; }
+.night-hero::before {
+    content: ''; position: absolute; inset: 0; z-index: -2;
+    background: linear-gradient(180deg, rgba(8,10,16,.78), rgba(8,10,16,.5) 48%, #080a10 100%), url('../img/foto.jpg') center 65% / cover;
+    pointer-events: none;
+}
+.night-hero::after {
+    content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: radial-gradient(ellipse at 15% 15%, rgba(102,217,255,.12), transparent 55%), radial-gradient(ellipse at 85% 35%, rgba(150,133,235,.13), transparent 50%);
+}
+.night-intro { max-width: 800px; margin: 0 auto 52px; text-align: center; }
+.night-kicker { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; line-height: 1.6; font-weight: 600; letter-spacing: 2.4px; text-transform: uppercase; color: var(--night-blue); margin-bottom: 18px; }
+.night-kicker::before { content: ''; width: 22px; height: 1px; background: currentColor; flex-shrink: 0; }
+.night-title { font-size: clamp(44px, 7.8vw, 94px); font-weight: 800; line-height: 1; letter-spacing: -.045em; margin: 0 0 24px; color: var(--night-text); }
+.night-title span { display: block; color: var(--night-blue); }
+.night-lead { color: #c2cfdb; font-size: clamp(14px, 1.7vw, 17px); line-height: 1.8; max-width: 540px; margin: 0 auto; text-wrap: balance; }
+.night-hero-actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.night-button {
+    display: inline-flex; align-items: center; justify-content: center; gap: 16px;
+    min-height: 48px; padding: 13px 24px; border: 1px solid transparent; border-radius: 12px;
+    font: inherit; font-size: 13px; font-weight: 700; line-height: 1.5; text-decoration: none;
+    color: #0a1822; background: var(--night-blue); cursor: pointer;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease;
+}
+.night-button-secondary { color: var(--night-text); background: rgba(15,22,32,.75); border-color: var(--night-border); }
+.night-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.night-fact, .night-ticket, .night-contact {
+    min-width: 0; background: linear-gradient(145deg, rgba(22,31,44,.96), rgba(12,17,26,.96));
+    border: 1px solid var(--night-border); border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.16);
+    transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.night-fact { display: flex; align-items: flex-start; gap: 18px; padding: 28px 24px; }
+.night-icon { flex: 0 0 44px; width: 44px; height: 44px; display: grid; place-items: center; color: var(--night-blue); background: rgba(160,230,255,.07); border: 1px solid rgba(160,230,255,.15); border-radius: 13px; }
+.night-icon svg { display: block; width: 23px; height: 23px; fill: currentColor; }
+.night-fact-label { color: var(--night-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 1.6px; font-weight: 600; margin-bottom: 9px; }
+.night-fact-value { color: var(--night-text); font-size: clamp(17px, 1.8vw, 21px); font-weight: 700; line-height: 1.4; }
+.night-fact-value small { display: block; margin-top: 5px; color: var(--night-muted); font-size: 13px; font-weight: 400; }
+.night-section { padding-block: 48px 64px; }
+.night-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 28px; }
+.night-heading { font-size: clamp(26px, 3.5vw, 40px); line-height: 1.2; letter-spacing: -.025em; font-weight: 700; color: var(--night-text); text-wrap: balance; }
+.night-section-heading .night-kicker { margin-bottom: 12px; }
+.night-section-copy { color: var(--night-muted); font-size: 14px; line-height: 1.8; max-width: 350px; }
+.night-tickets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.night-ticket { position: relative; overflow: hidden; padding: 30px; }
+.night-ticket::before { content: ''; position: absolute; inset: 0 24px auto; height: 2px; background: linear-gradient(90deg, transparent, var(--night-blue), transparent); opacity: .6; }
+.night-ticket-vip { background: radial-gradient(ellipse at 100% 0%, rgba(159,139,226,.15), transparent 70%), #10151f; border-color: rgba(183,163,240,.26); }
+.night-ticket-vip::before { background: linear-gradient(90deg, transparent, #c7b5f8, transparent); }
+.night-ticket-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.night-ticket-title { font-size: 20px; font-weight: 600; }
+.night-ticket-code { font-size: 11px; color: var(--night-muted); letter-spacing: 1px; }
+.night-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin: 26px 0; color: var(--night-text); }
+.night-price strong { font-size: clamp(34px, 4vw, 48px); line-height: 1.2; font-weight: 700; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.night-price span { color: var(--night-muted); font-size: 12px; font-weight: 600; letter-spacing: 1px; }
+.night-ticket-bottom { border-top: 1px dashed var(--night-border); padding-top: 24px; }
+.night-ticket-bottom .night-button { width: 100%; justify-content: space-between; }
+.night-ticket-vip .night-button { background: #d2c3f4; color: #211933; }
+.night-reservations { border-top: 1px solid var(--night-border); }
+.night-contacts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.night-contact { display: flex; align-items: center; gap: 18px; padding: 24px; text-decoration: none; color: var(--night-text); }
+.night-contact-icon { flex-shrink: 0; width: 46px; height: 46px; padding: 10px; background: rgba(110,231,183,.08); border: 1px solid rgba(110,231,183,.15); border-radius: 14px; }
+.night-contact img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.night-contact-copy { min-width: 0; flex: 1; }
+.night-contact-label { display: block; color: #99d7bd; font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-bottom: 5px; }
+.night-contact-number { display: block; font-size: clamp(14px, 1.7vw, 20px); font-weight: 600; overflow-wrap: anywhere; }
+.night-contact-arrow { color: #99d7bd; font-size: 22px; }
+.night-note { color: var(--night-muted); font-size: 12px; line-height: 1.8; margin-top: 20px; }
+.night-location { padding-block: 24px 88px; }
+.night-location-panel { display: grid; grid-template-columns: .8fr 1.2fr; gap: 40px; align-items: center; padding: 36px; border: 1px solid var(--night-border); border-radius: 24px; background: linear-gradient(135deg, #111823, #0c111a); }
+.night-location-copy { min-width: 0; }
+.night-address { margin: 20px 0; font-style: normal; font-size: 16px; line-height: 1.8; color: var(--night-text); }
+.night-address span { display: block; color: var(--night-muted); font-size: 14px; }
+.night-map { position: relative; min-width: 0; height: 320px; border: 1px solid var(--night-border); border-radius: 16px; overflow: hidden; background: #182330; }
+.night-map iframe { display: block; width: 100%; height: 100%; border: 0; filter: saturate(.55); }
+.night-map-link { position: absolute; inset: 0; border-radius: inherit; }
+.night-page a:focus-visible, .night-page button:focus-visible { outline: 2px solid var(--night-blue); outline-offset: 5px; }
+.night-map-link:focus-visible { outline-offset: -4px !important; }
+.night-back-link { display: inline-flex; color: var(--night-muted); text-decoration: none; font-size: 12px; margin-top: 30px; padding: 10px 0; }
+.night-menu-backdrop { display: none; }
+@media (hover: hover) and (pointer: fine) {
+    .night-fact:hover, .night-ticket:hover, .night-contact:hover { transform: translateY(-5px); border-color: rgba(160,230,255,.38); box-shadow: 0 18px 40px rgba(0,0,0,.25); }
+    .night-ticket-vip:hover { border-color: rgba(199,181,248,.55); }
+    .night-button:hover { transform: translateY(-2px); background: #c5efff; }
+    .night-button-secondary:hover { background: #1c2b3b; }
+    .night-ticket-vip .night-button:hover { background: #e1d7f9; }
+    .night-back-link:hover { color: var(--night-blue); }
+}
+@keyframes nightEnter { from { opacity: 0; translate: 0 20px; } to { opacity: 1; translate: 0 0; } }
+@keyframes nightAmbient { from { opacity: .5; } to { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+    .night-hero::after { animation: nightAmbient 8s ease-in-out infinite alternate; }
+    .night-page [data-night-reveal].is-visible { animation: nightEnter .7s cubic-bezier(.2,.9,.3,1) both; animation-delay: var(--night-delay, 0ms); }
+}
+@media (max-width: 970px) {
+    .night-page { padding-top: 0; }
+    .night-page section[id] { scroll-margin-top: 80px; }
+    .night-hero { padding-top: 100px; }
+    .night-page .mobile-menu-toggle { background: rgba(12,19,29,.9); border: 1px solid var(--night-border); border-radius: 12px; width: 44px; height: 44px; backdrop-filter: blur(12px); z-index: 4005; }
+    .night-page .mobile-menu-toggle span { left: 5px; top: 20px; }
+    .night-page .mobile-menu .logo { font-size: clamp(20px, 4vw, 28px); }
+    .night-page.night-menu-open { overflow: hidden; }
+    .night-page.night-menu-open .night-menu-backdrop { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); z-index: 4001; }
+    .night-facts { gap: 14px; }
+    .night-fact { flex-direction: column; padding: 22px; }
+    .night-location-panel { grid-template-columns: 1fr 1.1fr; gap: 24px; padding: 28px; }
+}
+@media (max-width: 680px) {
+    .night-shell { width: calc(100% - 32px); }
+    .night-hero { padding-bottom: 32px; }
+    .night-intro { margin-bottom: 36px; }
+    .night-title { font-size: clamp(42px, 12vw, 76px); }
+    .night-facts, .night-tickets, .night-contacts, .night-location-panel { grid-template-columns: 1fr; }
+    .night-fact { flex-direction: row; gap: 18px; padding: 22px; align-items: center; }
+    .night-fact-label { margin-bottom: 6px; }
+    .night-section { padding-block: 36px 44px; }
+    .night-section-heading { display: block; margin-bottom: 24px; }
+    .night-section-copy { margin-top: 14px; max-width: none; }
+    .night-ticket { padding: 24px; }
+    .night-tickets, .night-contacts { gap: 16px; }
+    .night-contact { padding: 20px; gap: 14px; }
+    .night-contact-number { font-size: clamp(13px, 4vw, 18px); }
+    .night-contact-arrow { font-size: 18px; }
+    .night-location { padding-block: 8px 48px; }
+    .night-location-panel { padding: 24px; gap: 24px; border-radius: 20px; }
+    .night-map { height: 260px; }
+    .night-location .night-button { width: 100%; }
+}
+@media (max-width: 360px) {
+    .night-hero-actions { flex-direction: column; }
+    .night-contact { padding: 16px; gap: 10px; }
+    .night-contact-icon { width: 40px; height: 40px; }
+    .night-location-panel { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .night-page *, .night-page *::before, .night-page *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

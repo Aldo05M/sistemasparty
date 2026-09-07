@@ -1,0 +1,556 @@
+/* ========================== */
+/*  REYES DEL PERREO STYLES   */
+/* ========================== */
+
+.perreo-section {
+        min-height: 100vh;
+        background: radial-gradient(ellipse at top, #1a0a2e 0%, #0d0d0d 60%, #000 100%);
+        padding: 40px 20px 80px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+}
+
+@media (max-width: 768px) {
+    body {
+        background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80') no-repeat top center/cover !important;
+        min-height: 100vh;
+        background-color: #111;
+    }
+    .perreo-section {
+        background: rgba(0,0,0,0.7);
+        z-index: 2;
+    }
+}
+
+/* ---- TÍTULO ---- */
+.perreo-title {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    text-shadow:
+        0 0 10px rgba(190, 50, 255, 0.8),
+        0 0 30px rgba(190, 50, 255, 0.4),
+        0 0 60px rgba(190, 50, 255, 0.2);
+    animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+    0%, 100% { text-shadow: 0 0 10px rgba(190,50,255,0.8), 0 0 30px rgba(190,50,255,0.4); }
+    50% { text-shadow: 0 0 20px rgba(190,50,255,1), 0 0 50px rgba(190,50,255,0.6), 0 0 80px rgba(255,50,200,0.3); }
+}
+
+.perreo-subtitle {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+/* ---- VOTE COUNTER ---- */
+.vote-counter {
+    display: inline-block;
+    background: rgba(190, 50, 255, 0.15);
+    border: 1px solid rgba(190, 50, 255, 0.4);
+    border-radius: 30px;
+    padding: 10px 28px;
+    margin-bottom: 32px;
+    color: #e0b0ff;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+.vote-counter strong {
+    color: #ff4df0;
+    font-size: 1.3rem;
+}
+
+/* ---- ALERT MESSAGE ---- */
+.alert-message {
+    max-width: 500px;
+    margin: 0 auto 24px;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    animation: slideDown 0.3s ease;
+}
+.alert-message.success {
+    background: rgba(0, 255, 100, 0.15);
+    border: 1px solid rgba(0, 255, 100, 0.4);
+    color: #5fff8a;
+}
+.alert-message.error {
+    background: rgba(255, 50, 50, 0.15);
+    border: 1px solid rgba(255, 50, 50, 0.4);
+    color: #ff6b6b;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================== */
+/*  PODIO                     */
+/* ========================== */
+/* Podium section titles */
+.podium-section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+.rey-title {
+    text-shadow: 0 0 15px rgba(255, 100, 0, 0.7), 0 0 30px rgba(255, 100, 0, 0.3);
+}
+.reina-title {
+    text-shadow: 0 0 15px rgba(255, 50, 200, 0.7), 0 0 30px rgba(255, 50, 200, 0.3);
+}
+
+.podium-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto 60px;
+    perspective: 800px;
+}
+
+.podium-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.4s ease;
+}
+.podium-slot:hover {
+    transform: translateY(-8px);
+}
+
+/* Icon */
+.podium-icon {
+    margin-bottom: 8px;
+}
+.podium-icon img {
+    height: 48px;
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(255,215,0,0.6));
+    animation: iconFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Photo */
+.podium-photo {
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(190, 50, 255, 0.6);
+    box-shadow: 0 0 20px rgba(190, 50, 255, 0.4);
+    margin-bottom: 10px;
+    background: #1a1a2e;
+}
+.podium-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.podium-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    text-shadow: 0 0 6px rgba(190,50,255,0.5);
+}
+
+.podium-votes {
+    color: #e0b0ff;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+/* Podium base */
+.podium-base {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    text-shadow: 0 0 10px rgba(190,50,255,0.6);
+}
+
+/* ---- 1ST PLACE ---- */
+.podium-1st {
+    order: 2;
+    z-index: 2;
+}
+.podium-1st .podium-photo {
+    width: 140px;
+    height: 140px;
+    border-color: #ffd700;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.2);
+}
+.podium-1st .podium-icon img {
+    height: 60px;
+}
+.podium-1st .podium-name {
+    font-size: 1.2rem;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255,215,0,0.6);
+}
+.podium-1st .podium-base {
+    background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%);
+    height: 120px;
+    min-width: 150px;
+}
+
+/* ---- 2ND PLACE ---- */
+.podium-2nd {
+    order: 1;
+}
+.podium-2nd .podium-photo {
+    width: 110px;
+    height: 110px;
+    border-color: #c0c0c0;
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.4);
+}
+.podium-2nd .podium-name {
+    color: #e0e0e0;
+}
+.podium-2nd .podium-base {
+    background: linear-gradient(180deg, #c0c0c0 0%, #808080 100%);
+    height: 90px;
+    min-width: 130px;
+}
+
+/* ---- 3RD PLACE ---- */
+.podium-3rd {
+    order: 3;
+}
+.podium-3rd .podium-photo {
+    width: 100px;
+    height: 100px;
+    border-color: #cd7f32;
+    box-shadow: 0 0 20px rgba(205, 127, 50, 0.4);
+}
+.podium-3rd .podium-name {
+    color: #e8b87a;
+}
+.podium-3rd .podium-base {
+    background: linear-gradient(180deg, #cd7f32 0%, #8b4513 100%);
+    height: 60px;
+    min-width: 120px;
+}
+
+/* ========================== */
+/*  PARTICIPANTS GRID         */
+/* ========================== */
+.participants-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 32px;
+    text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+}
+
+.participants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ---- CARD ---- */
+.participant-card {
+    background: linear-gradient(145deg, rgba(30, 15, 60, 0.9), rgba(15, 10, 40, 0.95));
+    border: 1px solid rgba(190, 50, 255, 0.25);
+    border-radius: 20px;
+    padding: 28px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.participant-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(190,50,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+.participant-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(190, 50, 255, 0.3);
+    border-color: rgba(190, 50, 255, 0.5);
+}
+
+/* Card rank badge */
+.card-rank {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(190, 50, 255, 0.25);
+    border: 1px solid rgba(190, 50, 255, 0.4);
+    color: #e0b0ff;
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+/* Card photo */
+.card-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 14px;
+    border: 3px solid rgba(190, 50, 255, 0.5);
+    box-shadow: 0 0 20px rgba(190, 50, 255, 0.3);
+    background: #1a1a2e;
+}
+.card-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-name {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-shadow: 0 0 8px rgba(190,50,255,0.4);
+}
+
+/* Card info */
+.card-info {
+    text-align: left;
+    margin-bottom: 14px;
+}
+.card-info p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.92rem;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.card-info p span {
+    color: #c88eff;
+    font-weight: 600;
+}
+
+/* Card votes */
+.card-votes {
+    color: #ff4df0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    text-shadow: 0 0 6px rgba(255, 77, 240, 0.4);
+}
+
+/* Vote button */
+.vote-btn {
+    background: linear-gradient(135deg, #be32ff, #ff4df0);
+    color: #fff;
+    border: none;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px rgba(190, 50, 255, 0.4);
+    width: 100%;
+    max-width: 220px;
+}
+.vote-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(190, 50, 255, 0.6);
+}
+.vote-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+.vote-btn:disabled {
+    background: linear-gradient(135deg, #444, #333);
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ========================== */
+/*  NEW KING OVERLAY          */
+/* ========================== */
+.new-king-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.new-king-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.new-king-content {
+    text-align: center;
+    animation: kingBounce 0.6s ease;
+}
+.new-king-content h2 {
+    font-size: 2.5rem;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255,215,0,0.8), 0 0 40px rgba(255,215,0,0.4);
+    margin-bottom: 12px;
+}
+.new-king-content p {
+    font-size: 1.8rem;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(190,50,255,0.6);
+}
+
+.crown-animation {
+    width: 100px;
+    height: auto;
+    margin-bottom: 16px;
+    animation: crownSpin 1s ease;
+    filter: drop-shadow(0 0 20px rgba(255,215,0,0.8));
+}
+
+@keyframes kingBounce {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes crownSpin {
+    0% { transform: rotateY(0deg) scale(0.5); }
+    50% { transform: rotateY(180deg) scale(1.2); }
+    100% { transform: rotateY(360deg) scale(1); }
+}
+
+/* ========================== */
+/*  LOADING SPINNER           */
+/* ========================== */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    color: rgba(255,255,255,0.5);
+    font-size: 1rem;
+}
+.loading-spinner::before {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(190,50,255,0.2);
+    border-top-color: #be32ff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================== */
+/*  RESPONSIVE                */
+/* ========================== */
+@media (max-width: 768px) {
+    .perreo-title {
+        font-size: 2rem;
+    }
+    .perreo-subtitle {
+        font-size: 0.95rem;
+    }
+
+    /* Podium vertical */
+    .podium-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+    .podium-1st { order: 1; }
+    .podium-2nd { order: 2; }
+    .podium-3rd { order: 3; }
+
+    .podium-1st .podium-photo {
+        width: 120px;
+        height: 120px;
+    }
+    .podium-2nd .podium-photo {
+        width: 100px;
+        height: 100px;
+    }
+    .podium-3rd .podium-photo {
+        width: 90px;
+        height: 90px;
+    }
+
+    .podium-base {
+        display: none;
+    }
+
+    /* Cards single column */
+    .participants-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .vote-btn {
+        max-width: 100%;
+        padding: 16px 24px;
+        font-size: 1.15rem;
+    }
+
+    .new-king-content h2 {
+        font-size: 1.6rem;
+    }
+    .new-king-content p {
+        font-size: 1.3rem;
+    }
+    .crown-animation {
+        width: 70px;
+    }
+}
+
+@media (max-width: 480px) {
+    .perreo-section {
+        padding: 24px 12px 60px;
+    }
+    .perreo-title {
+        font-size: 1.6rem;
+        letter-spacing: 1px;
+    }
+    .participant-card {
+        padding: 22px 16px;
+    }
+    .card-photo {
+        width: 100px;
+        height: 100px;
+    }
+}

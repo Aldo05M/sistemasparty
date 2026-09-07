@@ -1,0 +1,57 @@
+/* NAVBAR - Night theme adjustments */
+:root {
+    --nav-bg: linear-gradient(180deg, rgba(6,6,10,0.95), rgba(12,12,20,0.95));
+    --nav-text: #ffffff;
+    --accent: #39FF14;
+    --accent-2: #00F0FF;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(10px);
+    padding: 14px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 6px 28px rgba(0,0,0,0.55);
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--nav-text);
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+.logo span {
+    color: var(--accent-2);
+    text-shadow: 0 0 6px rgba(102,217,255,0.10);
+}
+
+.btn-ingresar {
+    background: rgba(255,255,255,0.03);
+    color: var(--nav-text);
+    padding: 10px 22px;
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.24s ease, box-shadow 0.24s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.45) inset;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+.btn-ingresar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.55) inset;
+}

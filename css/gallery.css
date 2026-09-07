@@ -1,0 +1,96 @@
+/* Gallery: shared Poppins typography, dark surfaces and ice-blue accents. */
+.gallery-section {
+    padding: clamp(64px, 8vw, 110px) clamp(16px, 4vw, 50px);
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(ellipse at 50% 25%, rgba(102,217,255,.07), transparent 65%), #08090c;
+    font-family: 'Poppins', sans-serif;
+}
+.gallery-section::before {
+    content: ''; position: absolute; inset: 0 12% auto; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(160,235,255,.22), transparent);
+    pointer-events: none;
+}
+.gallery-container { max-width: 1200px; margin: 0 auto; position: relative; }
+.gallery-header { text-align: center; margin-bottom: clamp(28px, 4vw, 48px); }
+.gallery-eyebrow { display: inline-block; color: #a0ebff; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; }
+.gallery-title { font-size: clamp(28px, 4.5vw, 56px); font-weight: 800; line-height: 1.12; letter-spacing: 1px; text-transform: uppercase; color: #fbfbfb; margin-bottom: 14px; text-shadow: 0 6px 22px rgba(0,0,0,.5); }
+.gallery-subtitle { font-size: clamp(14px, 1.5vw, 16px); color: #b9c9d1; line-height: 1.7; }
+.gallery-section .carousel-container { overflow: visible; }
+.carousel-wrapper { min-width: 0; }
+.gallery-section .carousel-track {
+    display: flex; gap: 24px; overflow-x: auto; padding: 14px 2px 26px;
+    scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    scrollbar-width: thin; scrollbar-color: #53717d #141a20;
+    cursor: grab; touch-action: pan-x pan-y pinch-zoom; will-change: auto;
+}
+.gallery-section .carousel-slide { display: contents; }
+.gallery-section .triptych-item {
+    flex: 0 0 calc((100% - 48px) / 3); min-width: 0; height: auto;
+    aspect-ratio: 3 / 4; position: relative; overflow: hidden;
+    border-radius: 18px; border: 1px solid rgba(160,235,255,.14);
+    background: #121820; scroll-snap-align: start;
+    box-shadow: 0 10px 28px rgba(0,0,0,.3);
+    transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.triptych-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: blur(18px); opacity: .3; transform: scale(1.15); }
+.triptych-item img { display: block; position: relative; width: 100%; height: 100%; object-fit: contain; transition: transform .6s cubic-bezier(.2,.9,.3,1); user-select: none; }
+.triptych-overlay { position: absolute; inset: auto 0 0; padding: 64px 24px 24px; background: linear-gradient(transparent, rgba(4,8,12,.94)); pointer-events: none; }
+.triptych-caption { color: #f4f8fa; font-size: clamp(16px, 1.7vw, 21px); font-weight: 700; line-height: 1.4; letter-spacing: .3px; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+.triptych-caption::before { content: ''; display: block; width: 28px; height: 2px; margin-bottom: 12px; background: #a0ebff; transition: width .35s ease; }
+.gallery-navigation { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; }
+.gallery-hint { color: #a8bbc5; font-size: 12px; line-height: 1.6; }
+.carousel-controls { display: flex; gap: 10px; flex-shrink: 0; }
+.carousel-btn { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(160,235,255,.25); background: #111a21; color: #cfeef8; font: inherit; font-size: 22px; cursor: pointer; transition: background .25s ease, transform .25s ease; }
+.carousel-btn:disabled { opacity: .3; cursor: default; }
+.carousel-btn:focus-visible, .carousel-track:focus-visible { outline: 2px solid #a0ebff; outline-offset: 4px; }
+.gallery-section .carousel-track.dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; user-select: none; }
+@media (hover: hover) and (pointer: fine) {
+    .gallery-section .triptych-item:hover { transform: translateY(-6px); border-color: rgba(160,235,255,.45); box-shadow: 0 18px 36px rgba(0,0,0,.45); }
+    .triptych-item:hover img { transform: scale(1.035); }
+    .triptych-item:hover .triptych-caption::before { width: 44px; }
+    .carousel-btn:hover:not(:disabled) { background: #223743; transform: translateY(-2px); }
+}
+@media (max-width: 960px) {
+    .gallery-section .triptych-item { flex-basis: calc((100% - 24px) / 2); }
+}
+@media (max-width: 600px) {
+    .gallery-section .carousel-track { gap: 16px; }
+    .gallery-section .triptych-item { flex-basis: 85%; border-radius: 16px; }
+    .triptych-overlay { padding: 56px 20px 20px; }
+    .gallery-hint { max-width: 180px; }
+}
+@keyframes galleryReveal { from { opacity: 0; translate: 0 18px; } to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: no-preference) {
+    .gallery-header.is-visible, .gallery-event.is-visible .gallery-event-header { animation: galleryReveal .7s ease both; }
+    .gallery-event.is-visible .triptych-item { animation: galleryReveal .7s ease both; animation-delay: var(--gallery-delay, 0ms); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .gallery-section .carousel-track { scroll-behavior: auto; }
+    .gallery-section *, .gallery-section *::before { animation: none !important; transition: none !important; }
+}
+
+/* Each event has its own heading, photo track and controls. */
+.gallery-event { min-width: 0; }
+.gallery-event + .gallery-event {
+    margin-top: clamp(40px, 6vw, 72px);
+    padding-top: clamp(32px, 5vw, 56px);
+    border-top: 1px solid rgba(160,235,255,.14);
+}
+.gallery-event-header { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.gallery-event-header > div { flex: 1; min-width: 0; }
+.gallery-event-number {
+    display: grid; place-items: center; flex: 0 0 48px; height: 48px;
+    border: 1px solid rgba(160,235,255,.2); border-radius: 14px;
+    background: #111a21; color: #a0ebff; font-size: 14px; font-weight: 700;
+}
+.gallery-event-title { color: #f4f8fa; font-size: clamp(21px, 2.7vw, 32px); font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+.gallery-event-description { margin-top: 8px; color: #b9c9d1; font-size: 13px; line-height: 1.7; }
+.gallery-event-count { flex-shrink: 0; color: #a0ebff; background: rgba(160,235,255,.06); border: 1px solid rgba(160,235,255,.12); border-radius: 30px; padding: 7px 12px; font-size: 11px; font-weight: 600; }
+@media (max-width: 600px) {
+    .gallery-event-header { flex-wrap: wrap; align-items: flex-start; gap: 12px; }
+    .gallery-event-number { flex-basis: 40px; height: 40px; border-radius: 12px; }
+    .gallery-event-header > div { flex-basis: calc(100% - 52px); }
+    .gallery-event-count { margin-left: 52px; }
+    .gallery-navigation { align-items: center; gap: 12px; }
+}

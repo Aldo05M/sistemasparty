@@ -1,0 +1,239 @@
+/* CONTESTS & PRIZES SECTION */
+.contests-section {
+    background: url('../img/foto.jpg') center center/cover no-repeat;
+    padding: 100px 40px;
+    position: relative;
+    overflow: hidden;
+}
+.contests-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 40%, rgba(102,217,255,0.04) 0%, transparent 55%);
+    background-size: 180% 180%;
+    animation: subtleShift 12s linear infinite;
+}
+
+/* soft top fade to hide hard seam from previous section */
+.contests-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(180deg, rgba(6,6,8,0.95) 0%, rgba(6,6,8,0.55) 40%, rgba(6,6,8,0.0) 100%);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.contests-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    padding: 40px 24px;
+}
+
+.contests-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contests-title {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--nav-text, #fff);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    text-shadow: 0 6px 22px rgba(0,0,0,0.6);
+}
+
+.contests-subtitle {
+    font-size: 16px;
+    color: rgba(160,235,255,0.9);
+    font-weight: 600;
+}
+
+.contests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 36px;
+    margin-bottom: 40px;
+}
+
+.contest-card {
+    background: linear-gradient(180deg, rgba(4,4,6,0.7), rgba(8,8,14,0.8));
+    padding: 32px 28px;
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.03);
+    box-shadow: 0 10px 36px rgba(0,0,0,0.65);
+    transition: transform 0.36s cubic-bezier(.2,.9,.3,1), box-shadow 0.36s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 320px;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: cardIn 0.7s ease forwards;
+}
+
+.contest-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(90deg, rgba(102,217,255,0.06), rgba(110,231,183,0.04));
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.contest-card:hover::before {
+    opacity: 0.9;
+}
+
+.contest-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 26px 64px rgba(0,0,0,0.7), 0 0 18px rgba(0,0,0,0.05) inset;
+}
+
+
+.contest-icon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.02);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    transition: transform 0.36s ease, box-shadow 0.36s ease;
+}
+
+.contest-card:hover .contest-icon {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.55);
+}
+
+.contest-icon svg {
+    width: 36px;
+    height: 36px;
+    fill: rgba(255,255,255,0.92);
+}
+
+.contest-name {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--accent-2, #66D9FF);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.contest-description {
+    font-size: 15px;
+    color: rgba(200,205,210,0.86);
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.prize-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 18px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+.contest-card:hover .prize-wrapper {
+    background: rgba(255,255,255,0.03);
+    border-color: rgba(102,217,255,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) inset;
+}
+
+.prize-badge {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.prize-badge svg {
+    width: 22px;
+    height: 22px;
+    fill: rgba(255,255,255,0.92);
+}
+
+.prize-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.prize-label {
+    font-size: 12px;
+    color: rgba(160,235,255,0.9);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.prize-amount {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent-2, #66D9FF);
+}
+
+/* Card entrance stagger */
+.contests-grid .contest-card:nth-child(1) { animation-delay: 0.08s; }
+.contests-grid .contest-card:nth-child(2) { animation-delay: 0.16s; }
+.contests-grid .contest-card:nth-child(3) { animation-delay: 0.24s; }
+.contests-grid .contest-card:nth-child(4) { animation-delay: 0.32s; }
+
+@keyframes cardIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.contests-note {
+    text-align: center;
+    margin-top: 40px;
+    padding: 16px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    border: 1px dashed rgba(255,255,255,0.04);
+}
+
+.contests-note p {
+    font-size: 14px;
+    color: rgba(220,225,230,0.82);
+    font-weight: 600;
+    margin: 0;
+}
+
+@keyframes subtleShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}

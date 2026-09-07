@@ -1,0 +1,172 @@
+/* ATTENDEES COUNTER SECTION */
+.attendees-section {
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%);
+    padding: 100px 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.attendees-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(57, 255, 20, 0.1) 0%, transparent 70%);
+    animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.attendees-container {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+}
+
+.attendees-title {
+    font-size: 56px;
+    font-weight: 900;
+    color: #FF10F0;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #FF10F0,
+                 0 0 20px #FF10F0,
+                 0 0 30px #FF10F0,
+                 0 0 40px #00F0FF;
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+.attendees-subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 50px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.counter-display {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background: linear-gradient(145deg, rgba(0, 0, 0, 0.6) 0%, rgba(26, 26, 46, 0.6) 100%);
+    padding: 50px 80px;
+    border-radius: 30px;
+    border: 4px solid #39FF14;
+    box-shadow: 0 0 30px rgba(57, 255, 20, 0.5),
+                0 0 60px rgba(0, 240, 255, 0.3),
+                inset 0 0 30px rgba(57, 255, 20, 0.1);
+    margin-bottom: 50px;
+    backdrop-filter: blur(10px);
+}
+
+.counter-number {
+    font-size: 120px;
+    font-weight: 900;
+    color: #FFFF00;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 15px #FFFF00,
+                 0 0 30px #FFFF00,
+                 0 0 45px #FF6600;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-width: 200px;
+}
+
+.counter-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.3) 0%, rgba(57, 255, 20, 0.3) 100%);
+    border-radius: 50%;
+    border: 3px solid #00F0FF;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6),
+                inset 0 0 20px rgba(57, 255, 20, 0.2);
+    animation: rotateIcon 3s linear infinite;
+}
+
+.counter-icon svg {
+    width: 50px;
+    height: 50px;
+    fill: #00F0FF;
+    filter: drop-shadow(0 0 10px #00F0FF);
+}
+
+.attendee-btn {
+    position: relative;
+    background: linear-gradient(135deg, #FF10F0 0%, #FFFF00 100%);
+    color: #000;
+    padding: 20px 60px;
+    border: 4px solid #39FF14;
+    border-radius: 50px;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 25px rgba(255, 16, 240, 0.6),
+                0 0 50px rgba(255, 255, 0, 0.4),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.attendee-btn:hover:not(:disabled) {
+    transform: translateY(-5px) scale(1.05);
+    border-color: #00F0FF;
+    box-shadow: 0 0 40px rgba(255, 16, 240, 0.9),
+                0 0 70px rgba(255, 255, 0, 0.7),
+                0 0 100px rgba(0, 240, 255, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+}
+
+.attendee-btn:active:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.attendee-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        rgba(255, 255, 255, 0.4) 90deg,
+        transparent 180deg,
+        rgba(255, 255, 255, 0.4) 270deg,
+        transparent 360deg
+    );
+    animation: rotateBtnGlow 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.attendee-btn:hover:not(:disabled) .btn-glow {
+    opacity: 1;
+}
+
+.attendees-message {
+    margin-top: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #00F0FF;
+    min-height: 30px;
+    text-shadow: 0 0 10px currentColor;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Evento - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <link rel="stylesheet" href="css/evento.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="night-page">
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li class="active"><a href="#evento" aria-current="page">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="eventMobileMenu">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" id="eventMobileMenu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li class="active"><a href="#evento" aria-current="page">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="night-menu-backdrop" aria-hidden="true"></div>
+    <main>
+        <!-- EVENT INFO SECTION -->
+        <section class="night-hero" id="evento" aria-labelledby="eventTitle">
+            <div class="night-shell">
+                <header class="night-intro" data-night-reveal>
+                    <p class="night-kicker">Huatusco, Veracruz · Night</p>
+                    <h1 class="night-title" id="eventTitle">SISTEMAS <span>PARTY</span></h1>
+                    <p class="night-lead">Música, amigos y una noche para recordar.<br>Todo lo que necesitas saber para vivirla.</p>
+                    <div class="night-hero-actions">
+                        <a class="night-button" href="#boletos">Ver boletos <span aria-hidden="true">↗</span></a>
+                        <a class="night-button night-button-secondary" href="#ubicacion">Cómo llegar</a>
+                    </div>
+                </header>
+                <div class="night-facts">
+                    <article class="night-fact" data-night-reveal>
+                        <div class="night-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/>
+                            <path d="M7 12h5v5H7z"/>
+                        </svg></div>
+                        <div>
+                            <h2 class="night-fact-label">Fecha</h2>
+                            <p class="night-fact-value"><time datetime="2026-04-30">24 de septiembre <small>2026</small></time></p>
+                        </div>
+                    </article>
+                    <article class="night-fact" data-night-reveal style="--night-delay: 80ms">
+                        <div class="night-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                            <path d="M12.5 7H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+                        </svg></div>
+                        <div>
+                            <h2 class="night-fact-label">Hora</h2>
+                            <p class="night-fact-value"><time datetime="21:00">23:00 h</time><small>La noche comienza aquí</small></p>
+                        </div>
+                    </article>
+                    <article class="night-fact" data-night-reveal style="--night-delay: 160ms">
+                        <div class="night-icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg></div>
+                        <div>
+                            <h2 class="night-fact-label">Locación</h2>
+                            <p class="night-fact-value">Disco Bar Amnesia<small>Huatusco, Veracruz</small></p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- TICKETS -->
+        <section class="night-section night-shell" id="boletos" aria-labelledby="ticketsTitle">
+            <div class="night-section-heading" data-night-reveal>
+                <div>
+                    <p class="night-kicker">01 / Tu acceso</p>
+                    <h2 class="night-heading" id="ticketsTitle">Precio de boletos</h2>
+                </div>
+                <p class="night-section-copy">Elige cómo vivir la noche.<br>Reserva tu boleto general o tu mesa .</p>
+            </div>
+            <div class="night-tickets">
+                <article class="night-ticket" data-night-reveal>
+                    <div class="night-ticket-top">
+                        <h3 class="night-ticket-title">General</h3>
+                        <span class="night-ticket-code" aria-hidden="true">01 / PARTY</span>
+                    </div>
+                    <p class="night-price"><strong>$80.00</strong> <span>MXN</span></p>
+                    <div class="night-ticket-bottom">
+                        <a class="night-button night-button-secondary" href="#reservas">Reservar General <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+                <article class="night-ticket night-ticket-vip" data-night-reveal style="--night-delay: 100ms">
+                    <div class="night-ticket-top">
+                        <h3 class="night-ticket-title">Mesa </h3>
+                        <span class="night-ticket-code" aria-hidden="true">02 / PARTY</span>
+                    </div>
+                    <p class="night-price"><strong>$00.00</strong> <span>MXN</span></p>
+                    <div class="night-ticket-bottom">
+                        <a class="night-button" href="#reservas">Reservar Mesa VIP <span aria-hidden="true">↗</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- RESERVATION / TICKET INFO SECTION -->
+        <section class="night-section night-reservations night-shell" id="reservas" aria-labelledby="reservationTitle">
+            <div class="night-section-heading" data-night-reveal>
+                <div>
+                    <p class="night-kicker">02 / Nos vemos en la pista</p>
+                    <h2 class="night-heading" id="reservationTitle">Venta y reserva<br>de boletos</h2>
+                </div>
+                <p class="night-section-copy">Comunícate por WhatsApp para comprar tus boletos o reservar tu mesa.</p>
+            </div>
+            <div class="night-contacts">
+                <a href="https://wa.me/525523104531" target="_blank" rel="noopener noreferrer" class="night-contact" data-night-reveal>
+                    <span class="night-contact-icon"><img src="img/whatsapp.png" alt="" width="26" height="26" loading="lazy"></span>
+                    <span class="night-contact-copy">
+                        <span class="night-contact-label">WHATSAPP</span>
+                        <span class="night-contact-number">+52 55 2310 4531</span>
+                    </span>
+                    <span class="night-contact-arrow" aria-hidden="true">↗</span>
+                </a>
+                <a href="https://wa.me/522711809831" target="_blank" rel="noopener noreferrer" class="night-contact" data-night-reveal style="--night-delay: 100ms">
+                    <span class="night-contact-icon"><img src="img/whatsapp.png" alt="" width="26" height="26" loading="lazy"></span>
+                    <span class="night-contact-copy">
+                        <span class="night-contact-label">WHATSAPP</span>
+                        <span class="night-contact-number">+52 271 180 9831</span>
+                    </span>
+                    <span class="night-contact-arrow" aria-hidden="true">↗</span>
+                </a>
+            </div>
+            <p class="night-note">Envíanos un mensaje con el tipo de boleto requerido: General o Mesa VIP.</p>
+        </section>
+
+        <!-- LOCATION MAP SECTION -->
+        <section class="night-location night-shell" id="ubicacion" aria-labelledby="locationTitle">
+            <div class="night-location-panel" data-night-reveal>
+                <div class="night-location-copy">
+                    <p class="night-kicker">03 / El punto de encuentro</p>
+                    <h2 class="night-heading" id="locationTitle">Aquí empieza<br>la noche.</h2>
+                    <address class="night-address">Disco Bar Amnesia<span>Av. 2 Pte. 1207, Centro</span><span>Huatusco, Veracruz</span></address>
+                    <a href="https://maps.app.goo.gl/Nx1K4z137nZwk3mE7" target="_blank" rel="noopener noreferrer" class="night-button night-button-secondary">Abrir en Google Maps <span aria-hidden="true">↗</span></a>
+                    <p class="night-note">Consulta la ubicación y planea tu llegada.</p>
+                </div>
+                <div class="night-map">
+                    <iframe src="https://maps.google.com/maps?cid=5970336783441642028&amp;hl=es&amp;z=18&amp;output=embed" title="Ubicación de Disco Bar Amnesia en Huatusco, Veracruz" width="600" height="320" loading="lazy" referrerpolicy="no-referrer-when-downgrade" tabindex="-1" allowfullscreen></iframe>
+                    <a href="https://maps.app.goo.gl/Nx1K4z137nZwk3mE7" target="_blank" rel="noopener noreferrer" class="night-map-link" aria-label="Abrir ubicación de Disco Bar Amnesia en Google Maps"></a>
+                </div>
+            </div>
+            <a class="night-back-link" href="index.html">← Volver al inicio</a>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/evento.js"></script>
+</body>
+</html>

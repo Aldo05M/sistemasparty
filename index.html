@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Party 2.0</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li class="active"><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU (off-canvas) -->
+    <nav class="mobile-menu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li class="active"><a href="#inicio">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- Overlay for mobile menu -->
+    <div class="mobile-menu-overlay"></div>
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <img src="img/de.jpg" alt="Dedo Background" class="hero-bg">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-subtitle"> New Sistemas  Party   </div>
+            <h1 class="hero-title">
+                <span class="hero-title-main">SISTEMAS PARTY</span>
+                <span class="hero-title-vol">NIGHT</span>
+            </h1>
+            <!-- Countdown Timer -->
+            <div class="countdown-container">
+                <div class="countdown-title">EL EVENTO COMIENZA EN:</div>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">17</div>
+                        <div class="countdown-label">DÍAS</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">22</div>
+                        <div class="countdown-label">HORAS</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">MINUTOS</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">SEGUNDOS</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA FESTIVAL SECTION -->
+    <section class="cta-festival">
+        <div class="cta-festival-content">
+            <h2 class="cta-festival-title">
+                ¡DISFRUTA DE LA<br>MEJOR EXPERIENCIA<br>CON SISTEMAS PARTY!
+            </h2>
+        </div>
+    </section>
+    <!-- CONTESTS & PRIZES SECTION -->
+    <section class="contests-section">
+        <div class="contests-container">
+            <div class="contests-header">
+                <h2 class="contests-title">CONCURSOS Y PREMIOS</h2>
+                <p class="contests-subtitle">¡Participa y gana increíbles premios!</p>
+            </div>
+
+            <div class="contests-grid">
+                <!-- Concurso 1 -->
+                <div class="contest-card disco-card" style="--card-bg: url('img/disco1.jpeg')">
+                    <div class="contest-icon">
+                        <!-- Disco ball icon -->
+
+                    </div>
+                    <h3 class="contest-name">Sorpresa</h3>
+                    <p class="contest-description">Muestra </p>
+
+                    <div class="prize-wrapper">
+                        <div class="prize-content">
+                            <span class="prize-label">Premio</span>
+                            <span class="prize-amount">Una botella</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concurso 2 -->
+                <div class="contest-card neon-card" style="--card-bg: url('img/disco2.jpeg')">
+                    <div class="contest-icon">
+                        
+                    </div>
+                    <h3 class="contest-name">Sorpresa</h3>
+                    <p class="contest-description">Durante el evento se darán a conocer las dinámicas</p>
+
+                    <div class="prize-wrapper">
+                       
+                        <div class="prize-content">
+                            <span class="prize-label">Premio</span>
+                            <span class="prize-amount">Zona Roja</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+    <!-- SHOWS SECTION -->
+   <!---- <section class="shows-section">
+        <h2 class="section-title">SHOWS</h2>
+        <div class="shows-grid">
+            <article class="show-card">
+                <img src="img/werever.jpeg" alt="Show 1">
+                <div class="show-caption">DJ Werever</div>
+            </article>
+            <article class="show-card">
+                <img src="img/jey_flyer.png" alt="Jey Flyer">
+                <div class="show-caption">Jey F en Vivo</div>
+            </article>
+            <article class="show-card">
+                <img src="img/fondo_negro.png" alt="Show 3">
+                <div class="show-caption">GOGOS</div>
+            </article>
+        </div>
+    </section>
+
+    <!-- GALLERY CAROUSEL SECTION -->
+    <section class="gallery-section" aria-labelledby="galleryTitle">
+        <div class="gallery-container">
+            <div class="gallery-header" data-gallery-reveal>
+                <span class="gallery-eyebrow">Así se vivió</span>
+                <h2 class="gallery-title" id="galleryTitle">Eventos anteriores</h2>
+                <p class="gallery-subtitle">Dos eventos, muchos momentos para recordar.</p>
+            </div>
+
+            <!-- APARTADO 1: DISCO HALLOWEEN - fotos originales del evento. -->
+            <section class="gallery-event" data-gallery data-gallery-reveal aria-labelledby="halloweenTitle">
+                <div class="gallery-event-header">
+                    <span class="gallery-event-number" aria-hidden="true">01</span>
+                    <div>
+                        <h3 class="gallery-event-title" id="halloweenTitle">Disco Halloween</h3>
+                        <p class="gallery-event-description">Una noche de disfraces, música y mucha energía.</p>
+                    </div>
+                    <span class="gallery-event-count">9 fotos</span>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track" id="halloweenTrack" tabindex="0" role="region" aria-labelledby="halloweenTitle" aria-describedby="halloweenHint">
+                            <figure class="triptych-item">
+                                <img src="img/disco9.jpeg" alt="Disco Halloween — La Energía" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">La Energía</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco8.jpeg" alt="Disco Halloween — La Multitud" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">La Multitud</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco3.jpeg" alt="Disco Halloween — La Vibración" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">La Vibración</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco4.jpeg" alt="Disco Halloween — Las Luces" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">Las Luces</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco5.jpeg" alt="Disco Halloween — El Escenario" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">El Escenario</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco6.jpeg" alt="Disco Halloween — La Conexión" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">La Conexión</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco7.jpeg" alt="Disco Halloween — La Emoción" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">La Emoción</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco2.jpeg" alt="Disco Halloween — El DJ" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">El DJ</p>
+                                </figcaption>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="img/disco1.jpeg" alt="Disco Halloween — La Experiencia" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">La Experiencia</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-navigation">
+                    <p class="gallery-hint" id="halloweenHint">Desliza o usa las flechas para ver las fotos.</p>
+                    <div class="carousel-controls" role="group" aria-label="Navegación de Disco Halloween">
+                        <button class="carousel-btn" type="button" data-gallery-prev aria-label="Foto anterior de Disco Halloween" aria-controls="halloweenTrack">&#8592;</button>
+                        <button class="carousel-btn" type="button" data-gallery-next aria-label="Foto siguiente de Disco Halloween" aria-controls="halloweenTrack">&#8594;</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- APARTADO 2: SISTEMAS PARTY 2.0
+                 IMÁGENES DE RELLENO: se reutilizan temporalmente fotos de img/.
+                 Cambia únicamente el src de cada img por tus fotos definitivas,
+                 por ejemplo: src="img/sistemas-party-2-01.jpeg".
+                 Puedes editar también el alt y el texto de cada tarjeta.
+            -->
+            <section class="gallery-event" data-gallery data-gallery-reveal aria-labelledby="sistemasPartyTitle">
+                <div class="gallery-event-header">
+                    <span class="gallery-event-number" aria-hidden="true">02</span>
+                    <div>
+                        <h3 class="gallery-event-title" id="sistemasPartyTitle">Sistemas Party 2.0</h3>
+                        <p class="gallery-event-description">La música y los momentos que nos hicieron vibrar.</p>
+                    </div>
+                    <span class="gallery-event-count">6 fotos</span>
+                </div>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track" id="sistemasPartyTrack" tabindex="0" role="region" aria-labelledby="sistemasPartyTitle" aria-describedby="sistemasPartyHint">
+                            <!-- RELLENO SISTEMAS PARTY 2.0 - FOTO 1: cambia el src por la ruta de tu imagen. -->
+                            <figure class="triptych-item">
+                                <img src="img/p1.jpg" alt="Vista provisional de Sistemas Party 2.0, foto 1" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">01</p>
+                                </figcaption>
+                            </figure>
+                            <!-- RELLENO SISTEMAS PARTY 2.0 - FOTO 2: cambia el src por la ruta de tu imagen. -->
+                            <figure class="triptych-item">
+                                <img src="img/p2.jpeg" alt="Vista provisional de Sistemas Party 2.0, foto 2" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">02</p>
+                                </figcaption>
+                            </figure>
+                            <!-- RELLENO SISTEMAS PARTY 2.0 - FOTO 3: cambia el src por la ruta de tu imagen. -->
+                            <figure class="triptych-item">
+                                <img src="img/p3.jpg" alt="Vista provisional de Sistemas Party 2.0, foto 3" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">03</p>
+                                </figcaption>
+                            </figure>
+                            <!-- RELLENO SISTEMAS PARTY 2.0 - FOTO 4: cambia el src por la ruta de tu imagen. -->
+                            <figure class="triptych-item">
+                                <img src="img/p4.jpeg" alt="Vista provisional de Sistemas Party 2.0, foto 4" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">04</p>
+                                </figcaption>
+                            </figure>
+                            <!-- RELLENO SISTEMAS PARTY 2.0 - FOTO 5: cambia el src por la ruta de tu imagen. -->
+                            <figure class="triptych-item">
+                                <img src="img/p5.jpg" alt="Vista provisional de Sistemas Party 2.0, foto 5" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">05</p>
+                                </figcaption>
+                            </figure>
+                            <!-- RELLENO SISTEMAS PARTY 2.0 - FOTO 6: cambia el src por la ruta de tu imagen. -->
+                            <figure class="triptych-item">
+                                <img src="img/p6.jpg" alt="Vista provisional de Sistemas Party 2.0, foto 6" loading="lazy" decoding="async" draggable="false">
+                                <figcaption class="triptych-overlay">
+                                    <p class="triptych-caption">06</p>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-navigation">
+                    <p class="gallery-hint" id="sistemasPartyHint">Desliza o usa las flechas para ver las fotos.</p>
+                    <div class="carousel-controls" role="group" aria-label="Navegación de Sistemas Party 2.0">
+                        <button class="carousel-btn" type="button" data-gallery-prev aria-label="Foto anterior de Sistemas Party 2.0" aria-controls="sistemasPartyTrack">&#8592;</button>
+                        <button class="carousel-btn" type="button" data-gallery-next aria-label="Foto siguiente de Sistemas Party 2.0" aria-controls="sistemasPartyTrack">&#8594;</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    <script src="js/main.js"></script>
+    <script>
+    // Wrap each character of hero titles with a span.char and set --i for stagger
+    document.addEventListener('DOMContentLoaded', function() {
+        ['.hero-title-main', '.hero-title-vol'].forEach(function(sel) {
+            var el = document.querySelector(sel);
+            if (!el) return;
+            var text = el.textContent || '';
+            // preserve exact spacing
+            el.innerHTML = '';
+            for (var i = 0; i < text.length; i++) {
+                var ch = text[i];
+                var span = document.createElement('span');
+                span.className = 'char';
+                span.textContent = ch === ' ' ? '\u00A0' : ch;
+                span.style.setProperty('--i', i);
+                el.appendChild(span);
+            }
+        });
+    });
+    </script>
+    <!-- ABOUT SECTION -->
+    <section class="about-section">
+        <div class="about-content">
+            <h2 class="about-title">¿Quiénes<br>somos?</h2>
+            <p class="about-description">
+                <strong>Somos parte de la experiencia del evento.</strong>
+            </p>
+            <p class="about-description">
+                Este sitio es parte del evento y funciona como un espacio digital donde los asistentes pueden interactuar, acceder a información y vivir el evento más allá de la pista de baile.
+            </p>
+            <p class="about-description">
+                Buscamos que cada persona se lleve una experiencia única, dinámica y alineada con la mejor vibra y ambiente.
+            </p>
+        </div>
+    </section>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-social">
+            </div>
+            <div class="footer-copyright">
+                <p>Copyright ©2026 Aldo M M. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+<script>
+// Mobile menu toggle logic (modern off-canvas)
+const menuToggle = document.querySelector('.mobile-menu-toggle');
+const mobileMenu = document.querySelector('.mobile-menu');
+const menuOverlay = document.querySelector('.mobile-menu-overlay');
+function openMobileMenu() {
+    mobileMenu.classList.add('open');
+    document.body.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    if (menuOverlay) menuOverlay.style.display = 'block';
+}
+function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    document.body.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    if (menuOverlay) menuOverlay.style.display = 'none';
+}
+if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener('click', function() {
+        if (mobileMenu.classList.contains('open')) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    });
+    // Close menu on link click (for SPA-like behavior)
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMobileMenu();
+        });
+    });
+}
+// Close menu when clicking outside (on overlay)
+if (menuOverlay) {
+    menuOverlay.addEventListener('click', closeMobileMenu);
+}
+// Close menu with ESC key
+window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        closeMobileMenu();
+    }
+});
+</script>
+</body>
+</html>

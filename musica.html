@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pon tu Rola - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+        <!-- SECCIÓN: Playlist (modo estático, solicitudes deshabilitadas) -->
+        <section class="song-request-section" id="songRequestSection">
+            <div class="song-request-card">
+                <h2>Playlist Oficial</h2>
+                <p>La funcionalidad de solicitud de canciones y votación está deshabilitada temporalmente.</p>
+                <p>Disfruta una selección curada:</p>
+                <ul class="static-playlist">
+                    <li>DJ Werever — Mix Especial</li>
+                    <li>Jey F — En Vivo</li>
+                    <li>GOGOS — Set Party</li>
+                    <li>Top Hits 2026 — Selección</li>
+                </ul>
+                <div class="song-note">Si quieres restaurar las solicitudes, habilita la base de datos o contacta al administrador.</div>
+            </div>
+        </section>
+    <script src="js/main.js"></script>
+    <script>
+    // Mobile menu toggle logic
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.toggle('open');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+    </script>
+</body>
+<style>
+@media (max-width: 970px) {
+    .song-request-section {
+        margin-top: -64px !important;
+        padding-top: 88px !important;
+        z-index: 1;
+        position: relative;
+    }
+}
+</style>
+</body>
+</html>

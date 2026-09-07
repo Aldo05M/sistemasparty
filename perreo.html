@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reyes de la noche - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/perreo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">
+            SISTEMAS <span>PARTY</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <!-- MOBILE MENU TOGGLE BUTTON -->
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+    </button>
+    <!-- MOBILE MENU -->
+    <nav class="mobile-menu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN: Reyes del Perreo (estática) -->
+    <section class="perreo-section">
+        <h1 class="perreo-title"> Reyes de la Noche</h1>
+        <p class="perreo-subtitle">La votación está deshabilitada temporalmente.</p>
+
+        <div class="static-winners">
+            <h2>Ganadores anteriores</h2>
+            <ul>
+                <li><strong>Rey:</strong> DJ Werever</li>
+                <li><strong>Reina:</strong> Jey F</li>
+            </ul>
+            <p>La sección de votaciones y el escaneo de QR fueron desactivados para evitar dependencias con la base de datos obsoleta.</p>
+        </div>
+    </section>
+
+    <!-- QR Scanner library (html5-qrcode) -->
+    <script src="js/main.js"></script>
+</body>
+<style>
+@media (max-width: 970px) {
+    .perreo-section {
+        margin-top: -64px !important;
+        padding-top: 88px !important;
+        z-index: 1;
+        position: relative;
+    }
+}
+</style>
+</body>
+</html>
+</body>
+</html>

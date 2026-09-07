@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrocinadores - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/patrocinadores.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="sponsors-page">
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li class="active"><a href="patrocinadores.html" aria-current="page">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sponsorsMobileMenu">
+        <span></span>
+    </button>
+    <nav class="mobile-menu" id="sponsorsMobileMenu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li class="active"><a href="patrocinadores.html" aria-current="page">Patrocinadores</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="sponsors-menu-backdrop" aria-hidden="true"></div>
+
+    <main>
+        <!-- SECCIÓN PATROCINADORES -->
+        <section class="sponsors-mural-section" aria-labelledby="sponsorsTitle">
+            <div class="sponsors-content">
+                <header class="sponsors-header" data-sponsor-reveal>
+                    <p class="sponsors-eyebrow">Sistemas Party · Night</p>
+                    <h1 class="sponsors-title" id="sponsorsTitle">Patrocinadores<span class="sponsors-title-accent">.</span></h1>
+                    <p class="sponsors-subtitle">Gracias por hacer posible esta noche.<br>Las marcas que forman parte de nuestra experiencia.</p>
+                </header>
+
+                <p class="sponsors-grid-heading" id="sponsorsGridTitle">Nos acompañan</p>
+                <ul class="sponsors-logos-grid" aria-labelledby="sponsorsGridTitle">
+                    <!-- LOGOS: cambia el src y el nombre de cada tarjeta para actualizar un patrocinador. -->
+                    <li class="sponsor-card" data-sponsor-reveal>
+                        <div class="sponsor-logo"><img src="img/logo1.png" alt="" width="240" height="160" decoding="async"></div>
+                        <div class="sponsor-card-caption">
+                            <p class="sponsor-card-label">Patrocinador</p>
+                            <h2 class="sponsor-name">Papelería Papper</h2>
+                        </div>
+                    </li>
+                    <li class="sponsor-card" data-sponsor-reveal style="--sponsor-delay: 80ms">
+                        <div class="sponsor-logo"><img src="img/logo2.png" alt="" width="240" height="160" decoding="async"></div>
+                        <div class="sponsor-card-caption">
+                            <p class="sponsor-card-label">Patrocinador</p>
+                            <h2 class="sponsor-name">Huatusco Noticias</h2>
+                        </div>
+                    </li>
+                    <li class="sponsor-card" data-sponsor-reveal style="--sponsor-delay: 160ms">
+                        <div class="sponsor-logo"><img src="img/logo3.png" alt="" width="240" height="160" decoding="async"></div>
+                        <div class="sponsor-card-caption">
+                            <p class="sponsor-card-label">Patrocinador</p>
+                            <h2 class="sponsor-name">Abarrotes San Juditas</h2>
+                        </div>
+                    </li>
+                    <li class="sponsor-card" data-sponsor-reveal>
+                        <div class="sponsor-logo"><img src="img/logo4.png" alt="" width="240" height="160" loading="lazy" decoding="async"></div>
+                        <div class="sponsor-card-caption">
+                            <p class="sponsor-card-label">Patrocinador</p>
+                            <h2 class="sponsor-name">DJ Hernán Publicidades</h2>
+                        </div>
+                    </li>
+                    <li class="sponsor-card" data-sponsor-reveal style="--sponsor-delay: 80ms">
+                        <div class="sponsor-logo"><img src="img/logo5.png" alt="" width="240" height="160" loading="lazy" decoding="async"></div>
+                        <div class="sponsor-card-caption">
+                            <p class="sponsor-card-label">Patrocinador</p>
+                            <h2 class="sponsor-name">Vivis Gym</h2>
+                        </div>
+                    </li>
+                    <li class="sponsor-card" data-sponsor-reveal style="--sponsor-delay: 160ms">
+                        <div class="sponsor-logo"><img src="img/logo6.png" alt="" width="240" height="160" loading="lazy" decoding="async"></div>
+                        <div class="sponsor-card-caption">
+                            <p class="sponsor-card-label">Patrocinador</p>
+                            <h2 class="sponsor-name">Luis IT Repair</h2>
+                        </div>
+                    </li>
+                </ul>
+
+                <aside class="sponsors-cta" aria-labelledby="sponsorsContactTitle" data-sponsor-reveal>
+                    <div>
+                        <p class="sponsors-eyebrow">Sé parte de la noche</p>
+                        <h2 class="sponsors-cta-title" id="sponsorsContactTitle">Tu marca también puede estar aquí.</h2>
+                        <p class="sponsors-cta-text">Súmate a Sistemas Party. Escríbenos para conocer cómo participar como patrocinador.</p>
+                    </div>
+                    <a href="contacto.html" class="sponsors-contact-btn">Contáctanos <span aria-hidden="true">↗</span></a>
+                </aside>
+                <a href="index.html" class="sponsors-back-link">← Volver al inicio</a>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/patrocinadores.js"></script>
+</body>
+</html>

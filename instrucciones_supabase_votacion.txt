@@ -1,0 +1,49 @@
+MEJORA DE SISTEMA DE VOTACIÓN - SUPABASE
+
+PASOS SEGUROS PARA IMPLEMENTAR RONDAS/EVENTOS DE VOTACIÓN
+
+1. Crear la tabla de eventos de votación:
+-------------------------------------------------
+CREATE TABLE IF NOT EXISTS voting_events (
+    id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+    name text NOT NULL,
+    is_active boolean DEFAULT false,
+    created_at timestamptz DEFAULT now()
+);
+
+2. Agregar columna de relación en votes_log:
+-------------------------------------------------
+ALTER TABLE votes_log
+ADD COLUMN IF NOT EXISTS voting_event_id uuid;
+
+3. (Opcional) Crear índice para búsquedas rápidas:
+-------------------------------------------------
+CREATE INDEX IF NOT EXISTS idx_votes_log_event ON votes_log(voting_event_id);
+
+4. (Opcional) Agregar relación FK:
+-------------------------------------------------
+ALTER TABLE votes_log
+ADD CONSTRAINT fk_votes_log_event
+FOREIGN KEY (voting_event_id) REFERENCES voting_events(id);
+
+ORDEN DE EJECUCIÓN:
+- Ejecuta los pasos en el orden mostrado arriba.
+- NO se pierden datos existentes.
+- Los votos anteriores quedarán con voting_event_id = NULL (compatibilidad total).
+
+USO TÍPICO:
+- Para iniciar una nueva ronda, crea un nuevo registro en voting_even-- Si RLS está activado, agrega una policy temporalmente abierta para pruebas:
+CREATE POLICY \"Allow update for anon\" ON participants
+FOR UPDATE USING (true);ts y usa su id en los nuevos votos.
+- Para contar votos por evento:
+  SELECT participant_id, COUNT(*) FROM votes_log WHERE voting_event_id = 'ID_EVENTO' GROUP BY participant_id;
+- Para evitar votos duplicados por IP y evento, consulta si ya existe un voto con ese participant_id, ip_address y voting_event_id antes de insertar.
+
+NOTAS:
+- No uses DROP TABLE ni elimines columnas existentes.
+- Puedes tener múltiples eventos/rondas y mantener todo el historial.
+- Si tienes dudas, consulta primero en un entorno de pruebas.
+
+Explicación:
+- Esta mejora permite reiniciar votos creando nuevos eventos, sin perder historial.
+- Los votos se asocian a eventos/rondas, y puedes filtrar, contar o analizar por cada evento.

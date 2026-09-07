@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Sistemas Party</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/contacto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="contact-page">
+    <!-- DESKTOP HORIZONTAL MENU CON LOGO -->
+    <nav class="main-menu-desktop">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li class="active"><a href="contacto.html" aria-current="page">Contacto</a></li>
+        </ul>
+    </nav>
+    <button class="mobile-menu-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="contactMobileMenu">
+        <span></span>
+    </button>
+    <nav class="mobile-menu" id="contactMobileMenu" aria-label="Menú móvil">
+        <div class="logo">SISTEMAS <span>PARTY</span></div>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="evento.html">Evento</a></li>
+            <li><a href="patrocinadores.html">Patrocinadores</a></li>
+            <li class="active"><a href="contacto.html" aria-current="page">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="contact-menu-backdrop" aria-hidden="true"></div>
+
+    <main>
+        <!-- CONTACT SECTION -->
+        <section class="contact-section" aria-labelledby="contactTitle">
+            <div class="contact-container">
+                <header class="contact-header" data-contact-reveal>
+                    <p class="contact-eyebrow">Sistemas Party · Night</p>
+                    <h1 class="contact-title" id="contactTitle">Contacto<span>.</span></h1>
+                    <p class="contact-subtitle">La noche empieza con un mensaje.<br>Hablemos por el medio que prefieras.</p>
+                </header>
+
+                <div class="contact-list">
+                    <!-- DATOS DE CONTACTO: actualiza el href y el dato visible de cada tarjeta si cambian. -->
+                    <a class="contact-item contact-whatsapp" href="https://wa.me/525523104531" target="_blank" rel="noopener noreferrer" data-contact-reveal>
+                        <span class="contact-icon"><img src="img/whatsapp.png" alt="" width="30" height="30" decoding="async"></span>
+                        <h2 class="contact-label">WhatsApp</h2>
+                        <p class="contact-description">Dudas, boletos y reservas.</p>
+                        <p class="contact-value">+52 55 2310 4531</p>
+                        <span class="contact-action">Escríbenos <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="contact-item contact-instagram" href="https://www.instagram.com/sistemas_party?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" data-contact-reveal style="--contact-delay: 80ms">
+                        <span class="contact-icon"><img src="img/instagram.png" alt="" width="30" height="30" decoding="async"></span>
+                        <h2 class="contact-label">Instagram</h2>
+                        <p class="contact-description">Conecta con la experiencia.</p>
+                        <p class="contact-value">@sistemas_party_vol_2</p>
+                        <span class="contact-action">Ver perfil <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="contact-item contact-email" href="mailto:systemparty6@gmail.com" data-contact-reveal style="--contact-delay: 160ms">
+                        <span class="contact-icon"><img src="img/gmail.png" alt="" width="30" height="30" decoding="async"></span>
+                        <h2 class="contact-label">Correo</h2>
+                        <p class="contact-description">Propuestas y colaboraciones.</p>
+                        <p class="contact-value">systemparty6@gmail.com</p>
+                        <span class="contact-action">Enviar correo <span aria-hidden="true">→</span></span>
+                    </a>
+                </div>
+
+                <aside class="contact-event" aria-labelledby="contactEventTitle" data-contact-reveal>
+                    <div>
+                        <p class="contact-eyebrow">Nos vemos en la pista</p>
+                        <h2 id="contactEventTitle">¿Vienes a la fiesta?</h2>
+                        <p>Fecha, boletos y ubicación, en un solo lugar.</p>
+                    </div>
+                    <a class="contact-event-button" href="evento.html">Ver el evento <span aria-hidden="true">↗</span></a>
+                </aside>
+                <a class="contact-back-link" href="index.html">← Volver al inicio</a>
+            </div>
+        </section>
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/contacto.js"></script>
+</body>
+</html>

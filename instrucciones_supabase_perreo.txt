@@ -1,0 +1,266 @@
+========================================================
+  INSTRUCCIONES SUPABASE - REYES DEL PERREO
+  Sistema de votación con podio en tiempo real
+========================================================
+
+=== PASO 1: CREAR TABLA "participants" ===
+
+Ve a Supabase > SQL Editor y ejecuta:
+
+CREATE TABLE participants (
+    id BIGSERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    age INTEGER,
+    school TEXT,
+    hobby TEXT,
+    social TEXT,
+    photo_url TEXT,
+    votes_count INTEGER DEFAULT 0,
+    category TEXT NOT NULL DEFAULT 'rey' CHECK (category IN ('rey', 'reina')),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- category = 'rey' -> usa corona_rey.png
+-- category = 'reina' -> usa corona_reina.png
+
+-- Habilitar RLS (Row Level Security)
+ALTER TABLE participants ENABLE ROW LEVEL SECURITY;
+
+-- Permitir lectura pública (cualquiera puede ver los participantes)
+CREATE POLICY "Lectura pública de participantes"
+    ON participants
+    FOR SELECT
+    USING (true);
+
+
+=== PASO 2: CREAR TABLA "votes_log" ===
+
+CREATE TABLE votes_log (
+    id BIGSERIAL PRIMARY KEY,
+    participant_id BIGINT NOT NULL REFERENCES participants(id) ON DELETE CASCADE,
+    ip_address TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Habilitar RLS
+ALTER TABLE votes_log ENABLE ROW LEVEL SECURITY;
+
+-- Permitir inserción (el RPC se encarga de la validación)
+CREATE POLICY "Insertar votos vía RPC"
+    ON votes_log
+    FOR INSERT
+    WITH CHECK (true);
+
+-- Índice para búsquedas rápidas por IP
+CREATE INDEX idx_votes_log_ip ON votes_log(ip_address);
+
+-- Índice para búsquedas por participante
+CREATE INDEX idx_votes_log_participant ON votes_log(participant_id);
+
+
+=== PASO 3: CREAR FUNCIÓN RPC PARA VOTAR ===
+
+Esta función valida que la IP no tenga más de 3 votos
+y registra el voto de forma atómica (segura).
+
+CREATE OR REPLACE FUNCTION vote_for_participant(
+    p_participant_id BIGINT,
+    p_ip TEXT
+)
+RETURNS JSON
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+    total_votes INTEGER;
+    participant_exists BOOLEAN;
+BEGIN
+    -- Verificar que el participante existe
+    SELECT EXISTS(SELECT 1 FROM participants WHERE id = p_participant_id)
+    INTO participant_exists;
+
+    IF NOT participant_exists THEN
+        RETURN json_build_object(
+            'success', false,
+            'message', 'Participante no encontrado'
+        );
+    END IF;
+
+    -- Contar votos totales de esta IP
+    SELECT COUNT(*)
+    INTO total_votes
+    FROM votes_log
+    WHERE ip_address = p_ip;
+
+    -- Verificar límite de 3 votos por IP
+    IF total_votes >= 3 THEN
+        RETURN json_build_object(
+            'success', false,
+            'message', 'Ya alcanzaste el límite de 3 votos'
+        );
+    END IF;
+
+    -- Registrar el voto en votes_log
+    INSERT INTO votes_log (participant_id, ip_address)
+    VALUES (p_participant_id, p_ip);
+
+    -- Incrementar el contador del participante
+    UPDATE participants
+    SET votes_count = votes_count + 1
+    WHERE id = p_participant_id;
+
+    RETURN json_build_object(
+        'success', true,
+        'message', 'Voto registrado exitosamente',
+        'remaining', 2 - total_votes
+    );
+END;
+$$;
+
+
+=== PASO 4: ACTIVAR REALTIME EN LA TABLA participants ===
+
+Opción A - Desde la interfaz:
+1. Ve a Database > Tables
+2. Haz clic en "participants"
+3. Activa el toggle "Enable Realtime"
+
+Opción B - Por SQL:
+ALTER PUBLICATION supabase_realtime ADD TABLE participants;
+
+
+=== PASO 5: CREAR BUCKET PARA IMÁGENES DE PARTICIPANTES ===
+
+1. Ve a Storage en el panel de Supabase
+2. Crea un nuevo bucket llamado: "perreo-fotos"
+3. Marca la opción "Public bucket" (para que las fotos sean accesibles)
+4. Sube las fotos de los participantes ahí
+
+Para obtener la URL pública de una foto:
+- Haz clic en la imagen subida
+- Copia el "Public URL"
+- Usa esa URL en el campo photo_url del participante
+
+
+=== PASO 6: INSERTAR PARTICIPANTES DE PRUEBA ===
+
+Cambia los datos y URLs de foto según tus participantes reales:
+
+INSERT INTO participants (name, age, school, hobby, social, photo_url, category)
+VALUES
+    ('Carlos Pérez', 22, 'Ing. Sistemas', 'Bailar', '@carlos_perreo', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/1.jpeg', 'rey'),
+    ('Miguel Torres', 21, 'Ing. Sistemas', 'Gym', '@miguel_fit', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/2.jpeg', 'rey'),
+    ('Roberto Díaz', 23, 'Ing. Sistemas', 'Futbol', '@rob_diaz', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/3.jpeg', 'rey'),
+    ('Luis Hernández', 20, 'Ing. Sistemas', 'Videojuegos', '@luis_hdz', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/4.jpeg', 'rey'),
+    ('María López', 21, 'Ing. Sistemas', 'Bailar', '@maria_dance', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/1-1.jpeg', 'reina'),
+    ('Andrea Díaz', 22, 'Ing. Sistemas', 'Cantar', '@andrea_diaz', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/1-2.jpeg', 'reina'),
+    ('Sofía Ramírez', 20, 'Ing. Sistemas', 'Maquillaje', '@sofi_ram', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/1-3.jpeg', 'reina'),
+    ('Valentina Cruz', 23, 'Ing. Sistemas', 'Fotografía', '@vale_cruz', 'https://mzxbepfxlffffcbehftx.supabase.co/storage/v1/object/public/perreo-fotos/1-4.jpeg', 'reina');
+
+-- IMPORTANTE: usa category = 'rey' para hombres, 'reina' para mujeres
+-- Esto determina qué corona se muestra en el 1er lugar del podio
+
+NOTA: Reemplaza 'URL_DE_LA_FOTO_X' con las URLs públicas
+      de las fotos que subiste al bucket "perreo-fotos".
+
+
+=== PASO 7: CONEXIÓN JAVASCRIPT CON SUPABASE ===
+
+El archivo js/supabase-config.js ya tiene la conexión configurada:
+
+    const SUPABASE_URL = 'https://TU_PROYECTO.supabase.co';
+    const SUPABASE_KEY = 'tu_anon_key_aqui';
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+El archivo js/perreo.js usa supabaseClient para:
+
+1. Leer participantes:
+   supabaseClient.from('participants').select('*').order('votes_count', { ascending: false })
+
+2. Votar (RPC):
+   supabaseClient.rpc('vote_for_participant', { p_participant_id: 123, p_ip: '1.2.3.4' })
+
+3. Suscripción en tiempo real:
+   supabaseClient.channel('perreo-realtime')
+       .on('postgres_changes', { event: '*', schema: 'public', table: 'participants' }, callback)
+       .subscribe()
+
+
+=== PASO 8: VERIFICAR QUE TODO FUNCIONA ===
+
+1. Abre perreo.html en el navegador
+2. Deberías ver los participantes cargados desde Supabase
+3. Haz clic en "Votar" - el voto debe registrarse
+4. Abre otra pestaña y verifica que los votos se actualizan en tiempo real
+5. Después de 3 votos, el botón debe deshabilitarse
+
+
+=== NOTAS IMPORTANTES ===
+
+- La validación de votos se hace por IP en el backend (función RPC)
+  y por localStorage en el frontend (doble capa de seguridad)
+
+- La función RPC usa SECURITY DEFINER para ejecutarse con permisos
+  elevados, evitando que el usuario manipule directamente las tablas
+
+- Si necesitas resetear los votos de un usuario para pruebas:
+  DELETE FROM votes_log WHERE ip_address = 'IP_DEL_USUARIO';
+  
+  Y recalcular conteos:
+  UPDATE participants p
+  SET votes_count = (SELECT COUNT(*) FROM votes_log v WHERE v.participant_id = p.id);
+
+- Para cambiar el límite de votos, modifica:
+  * En la función RPC: IF total_votes >= 3
+  * En js/perreo.js: const MAX_PERREO_VOTES = 3;
+
+
+========================================================
+  CORRECCIÓN: AGREGAR COLUMNA "category" (REY / REINA)
+  (Si ya creaste la tabla sin esta columna)
+========================================================
+
+Si ya tienes la tabla "participants" creada y funcionando,
+ejecuta estos pasos en Supabase > SQL Editor:
+
+--- PASO 1: Agregar la columna category ---
+
+ALTER TABLE participants
+ADD COLUMN category TEXT NOT NULL DEFAULT 'rey'
+CHECK (category IN ('rey', 'reina'));
+
+-- Esto agrega la columna con valor por defecto 'rey'
+-- para todos los participantes que ya tenías.
+
+
+--- PASO 2: Actualizar la categoría de cada participante ---
+
+Cambia la categoría de las participantes mujeres a 'reina'.
+Usa el nombre o el ID de cada una:
+
+-- Por nombre:
+UPDATE participants SET category = 'reina' WHERE name = 'María López';
+UPDATE participants SET category = 'reina' WHERE name = 'Andrea Díaz';
+
+-- O por ID (si conoces los IDs):
+-- UPDATE participants SET category = 'reina' WHERE id IN (2, 4);
+
+-- Verifica que quedó bien:
+SELECT id, name, category FROM participants ORDER BY id;
+
+
+--- PASO 3: Listo ---
+
+No necesitas cambiar nada más en Supabase.
+El código JavaScript (js/perreo.js) ya está preparado para:
+
+- Leer el campo "category" de cada participante
+- Mostrar corona_rey.png o corona_reina.png en el podio
+- Mostrar "Nuevo Rey del Perreo" o "Nueva Reina del Perreo"
+  en la animación cuando cambia el primer lugar
+
+Los valores válidos son:
+  'rey'   -> hombres  -> img/corona_rey.png
+  'reina' -> mujeres  -> img/corona_reina.png
+
+========================================================

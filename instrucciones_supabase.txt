@@ -1,0 +1,78 @@
+===========================================================
+  INSTRUCCIONES PARA AGREGAR COLUMNA deezer_id EN SUPABASE
+===========================================================
+
+PASO 1: ACCEDER AL SQL EDITOR
+------------------------------
+1. Entra a https://supabase.com y abre tu proyecto
+2. En el menú lateral izquierdo, haz clic en "SQL Editor"
+3. Haz clic en "New query" (Nueva consulta)
+
+
+PASO 2: EJECUTAR EL SQL
+-------------------------
+Copia y pega el siguiente SQL y haz clic en "Run":
+
+  ALTER TABLE canciones
+  ADD COLUMN deezer_id BIGINT DEFAULT NULL;
+
+Esto agrega la columna sin afectar los registros existentes.
+Los registros que ya tienes tendrán deezer_id = NULL.
+
+
+PASO 3 (OPCIONAL): HACER LA COLUMNA UNIQUE
+--------------------------------------------
+Si quieres evitar duplicados a nivel de base de datos:
+
+  CREATE UNIQUE INDEX idx_canciones_deezer_id
+  ON canciones (deezer_id)
+  WHERE deezer_id IS NOT NULL;
+
+NOTA: Usamos un "partial index" (WHERE deezer_id IS NOT NULL)
+para que las canciones agregadas manualmente (sin deezer_id)
+no causen conflictos. Solo las que tienen deezer_id serán
+validadas como únicas.
+
+
+PASO 4: VERIFICAR
+-------------------
+1. Ve a "Table Editor" en el menú lateral
+2. Selecciona la tabla "canciones"
+3. Deberías ver la nueva columna "deezer_id" al final
+4. Los registros existentes tendrán NULL en esa columna
+
+
+RESUMEN DE LA TABLA DESPUÉS DEL CAMBIO:
+-----------------------------------------
+  id           -> int8 (auto-generado)
+  nombre       -> text
+  artista      -> text
+  votos        -> int4
+  inserted_at  -> timestamptz
+  deezer_id    -> int8 (nullable, nuevo)
+
+
+BUENAS PRÁCTICAS:
+------------------
+- No borres ni renombres columnas existentes
+- La columna deezer_id es nullable para mantener
+  compatibilidad con canciones agregadas manualmente
+- El partial unique index solo valida unicidad cuando
+  deezer_id tiene un valor (no NULL)
+- Si en el futuro quieres migrar canciones manuales,
+  puedes buscar su deezer_id y actualizarlas con:
+
+  UPDATE canciones
+  SET deezer_id = 123456789
+  WHERE id = X;
+
+
+QUÉ HACER SI ALGO SALE MAL:
+-----------------------------
+Para revertir los cambios:
+
+  DROP INDEX IF EXISTS idx_canciones_deezer_id;
+  ALTER TABLE canciones DROP COLUMN IF EXISTS deezer_id;
+
+Esto eliminará la columna y el índice sin afectar el resto
+de la tabla.

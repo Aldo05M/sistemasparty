@@ -1,5 +1,0 @@
-const canvas=document.querySelector('#particles'),ctx=canvas.getContext('2d');let particles=[];
-function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);particles=Array.from({length:Math.min(55,Math.floor(innerWidth/20))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,size:Math.random()*1.3+.3,speed:Math.random()*.25+.08}))}
-function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);ctx.fillStyle='rgba(0,153,255,.38)';particles.forEach(p=>{p.y-=p.speed;if(p.y<0){p.y=innerHeight;p.x=Math.random()*innerWidth}ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()});requestAnimationFrame(draw)}
-const messages=['Conectando nuevas ideas...','Afinando la experiencia...','Sincronizando el Party Core...','Preparando la próxima fiesta...'];let message=0;setInterval(()=>{message=(message+1)%messages.length;document.querySelector('#terminalMessage').textContent=messages[message]},2800);
-window.addEventListener('resize',resize);resize();draw();
